@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  
+  <div>
+    <ion-row>
+      <ion-col size="12">
+        <div class="heading">
+          <h1>More</h1>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-list class="newitem">
+      <ion-item button mode="ios" (click)="profile()">
+        <img slot="start" src="assets/images/icons/user.svg">
+        <ion-label>
+          Profile
+        </ion-label>
+      </ion-item>
+      <ion-item button mode="ios" (click)="help()">
+        <img slot="start" src="assets/images/icons/question.svg">
+        <ion-label>
+          Help & Support
+        </ion-label>
+      </ion-item>
+      <ion-item button mode="ios" (click)="term()">
+        <img slot="start" src="assets/images/icons/information.svg">
+        <ion-label>
+          Terms and Conditions
+        </ion-label>
+      </ion-item>
+      <ion-item button mode="ios" (click)="logout()" *ngIf="loggedIn=='true'">
+        <img slot="start" src="assets/images/icons/logout.svg">
+        <ion-label>
+          logout
+        </ion-label>
+      </ion-item>
+      <ion-item button mode="ios" (click)="login()" *ngIf="loggedIn!='true'">
+        <img style="width: 20px;height: 20px;" slot="start" src="assets/images/icons/login.svg">
+        <ion-label>
+          Login
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

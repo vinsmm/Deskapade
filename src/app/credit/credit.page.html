@@ -1,0 +1,110 @@
+<ion-header>
+  
+  <ion-toolbar>
+   
+    <ion-title>Credits</ion-title>
+  </ion-toolbar>
+  
+  <div class="segmentarea" *ngIf="loggedIn=='true'" >
+    <div class="btnarea btnareaactive" >
+      Buy Credits
+    </div>
+    <div class="btnarea " (click)="activity()" >
+      Activity
+    </div>
+  </div>
+</ion-header> 
+
+<ion-content class="newcontentbg">
+  <div *ngIf="loggedIn!='true'" style="margin-top: 60%;" >
+   <ion-row>
+     <ion-col size=3></ion-col>
+     <ion-col size=6 (click)="loginnow()">
+      <div id="loginbox">
+        <ion-label style="font-size: 20pt;color: #000000;font-weight: bold;">
+          Login
+        </ion-label>
+      </div>
+     </ion-col>
+     <ion-col size=3></ion-col>
+   </ion-row>
+  </div>
+
+  <div class="buycredit" *ngIf="loggedIn=='true'">
+    <ion-row>
+      <ion-col size="12">
+        <h2>I would like to buy...</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <div class="newcardin">
+            <ion-row>
+              <ion-col size="3">
+                <div ion-activatable class="ion-activatable ripple-parent">
+                  <ion-icon class="ion-activatable ripple-parent" name="remove-circle-outline" (click)="decrement()">
+                  </ion-icon>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <p>
+                  {{buyCredit}}<img src="assets/images/icons/credits-filled.svg" />
+                </p>
+              </ion-col>
+
+              <ion-col size="3">
+                <div ion-activatable class="ion-activatable ripple-parent">
+                  <ion-icon class="ion-activatable ripple-parent" name="add-circle-outline" (click)="increment()">
+                  </ion-icon>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              </ion-col>
+            </ion-row>
+
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-button expand="full" class="creditbtn active" fill="outline" shape="round" (click)="dbCredit(30)">30 <img
+            src="assets/images/icons/credits-filled.svg" />
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" class="creditbtn " fill="outline" shape="round" (click)="dbCredit(50)">50 <img
+            src="assets/images/icons/credits-filled.svg" /></ion-button>
+
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" class="creditbtn" fill="outline" shape="round"(click)="dbCredit(100)">100 <img
+            src="assets/images/icons/credits-filled.svg" /></ion-button>
+
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+</ion-content>
+<div class="bottom"  *ngIf="loggedIn=='true'">
+  <!-- <ion-row>
+    <ion-col size="12">
+      <div class="newitem">
+        <ion-item class="newselect">
+          <img slot="start" src="assets/images/icons/promo.svg" />
+          <ion-input placeholder="Promo code"></ion-input>
+        </ion-item>
+      </div>
+    </ion-col>
+  </ion-row> -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-button expand="full" (click)="purchaseCredit()" shape="round" class="newsearch"> Buy Now <img
+          src="assets/images/icons/arrow_white.svg" /></ion-button>
+    </ion-col>
+  </ion-row>
+</div>

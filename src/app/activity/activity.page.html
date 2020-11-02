@@ -1,0 +1,165 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Credits</ion-title>
+  </ion-toolbar>
+   
+  <div class="segmentarea" style="background: white;">
+    <div class="btnarea " (click)="activity()" style="background: white;">
+      Buy Credits
+    </div>
+    <div class="btnarea btnareaactive" style="background: white;">
+      Activity
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-list class="newhead">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/images/icons/credits-filled.svg">
+      </ion-avatar>
+      <ion-label>
+        <p>You currently have</p>
+        <h2>{{myCredit}} Credits</h2>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+  <div>
+    <ion-grid fixed>
+      <ion-row class="border">
+        <ion-col>
+          <div class="newheading">
+            <h4>
+              Date
+            </h4>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <h4>
+              In/Out
+            </h4>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <h4>
+              Balance
+            </h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="border" *ngFor="let item of historyArr">
+        <ion-col>
+          <div class="newheading">
+            <p>
+              {{item.credits_date}}
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              <ion-icon *ngIf="item.credit_type=='1'" name="add-outline"></ion-icon>
+              <ion-icon *ngIf="item.credit_type=='2'" name="remove-outline"></ion-icon>
+              {{item.credits}}<img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              {{item.total_credits}} <img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row class="border">
+        <ion-col>
+          <div class="newheading">
+            <p>
+              18 Aug 2020
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              <ion-icon name="remove-outline"></ion-icon>
+              20 <img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+
+              40<img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="border">
+        <ion-col>
+          <div class="newheading">
+            <p>
+              12 Aug 2020
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              <ion-icon name="remove-outline"></ion-icon>
+              10 <img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              60 <img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="border">
+        <ion-col>
+          <div class="newheading">
+            <p>
+              10 Aug 2020
+            </p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="newheading">
+            <p>
+              75 <img src="assets/images/icons/credits.svg">
+            </p>
+          </div>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+  </div>
+  <div class="bottomin">
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" shape="round" class="newsearch" (click)="activity()"> Buy more Credits <img
+            src="assets/images/icons/credits_white.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

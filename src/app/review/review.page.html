@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="end">
+      <button (click)="dismiss()" ion-button class="newclose">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="newarea">
+    <ion-row>
+      <ion-col size="12">
+        <h5 class="head">How was your booking experience?</h5>
+        <div class="star">
+          <rating [(ngModel)]="rate" readonly="false" size="5" (ngModelChange)="onRateChange($event)">
+          </rating>
+        </div>
+        <!-- <div class="star">
+<div class="newstar"><ion-icon name="star"></ion-icon></div>
+<div class="newstar"><ion-icon name="star"></ion-icon></div>
+<div class="newstar"><ion-icon name="star"></ion-icon></div>
+<div class="newstar"><ion-icon name="star-outline"></ion-icon></div>
+<div class="newstar"><ion-icon name="star-outline"></ion-icon></div>
+ -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="newradio">
+          <!-- <ion-radio-group value="one" mode="ios">
+    <ion-item>
+      <ion-label> dummy text of the printing and typesetting industry. Lorem Ipsum has been</ion-label>
+      <ion-radio slot="start" value="one"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>dummy text of the printing and typesetting industry</ion-label>
+      <ion-radio slot="start" value="two"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>dummy text of the printing and typesetting industry. </ion-label>
+      <ion-radio slot="start" value="three"></ion-radio>
+    </ion-item>
+  </ion-radio-group> -->
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item class="newtextarea ">
+          <ion-textarea [(ngModel)]="comments" rows="6" cols="20" placeholder="How could we improve your experience?"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button class="newsearch" shape="round" expand="full" (click)="submitReview()">Submit<img
+          src="assets/images/icons/arrow_white.svg" /></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

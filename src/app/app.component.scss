@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Heebo';
+    src: url('/assets/fonts/Heebo-Regular.eot');
+    src: url('/assets/fonts/Heebo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/Heebo-Regular.woff2') format('woff2'),
+        url('/assets/fonts/Heebo-Regular.woff') format('woff'),
+        url('/assets/fonts/Heebo-Regular.ttf') format('truetype'),
+        url('/assets/fonts/Heebo-Regular.svg#Heebo-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heebo';
+    src: url('/assets/fonts/Heebo-Medium.eot');
+    src: url('/assets/fonts/Heebo-Medium.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/Heebo-Medium.woff2') format('woff2'),
+        url('/assets/fonts/Heebo-Medium.woff') format('woff'),
+        url('/assets/fonts/Heebo-Medium.ttf') format('truetype'),
+        url('/assets/fonts/Heebo-Medium.svg#Heebo-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heebo';
+    src: url('/assets/fonts/Heebo-SemiBold.eot');
+    src: url('/assets/fonts/Heebo-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/Heebo-SemiBold.woff2') format('woff2'),
+        url('/assets/fonts/Heebo-SemiBold.woff') format('woff'),
+        url('/assets/fonts/Heebo-SemiBold.ttf') format('truetype'),
+        url('/assets/fonts/Heebo-SemiBold.svg#Heebo-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heebo';
+    src: url('/assets/fonts/Heebo-Bold.eot');
+    src: url('/assets/fonts/Heebo-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/Heebo-Bold.woff2') format('woff2'),
+        url('/assets/fonts/Heebo-Bold.woff') format('woff'),
+        url('/assets/fonts/Heebo-Bold.ttf') format('truetype'),
+        url('/assets/fonts/Heebo-Bold.svg#Heebo-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body
+{
+   font-family: 'Heebo';
+
+}
+
+.alert-button.sc-ion-alert-md
+{
+    text-align: center;
+    width: 45%;
+}
+
+.rating {
+    ion-icon {
+      color: gray;
+  
+      &.filled {
+        //color: #26ff00;
+        fill: #000000;
+      }
+    }
+  }

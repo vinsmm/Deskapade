@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/home' icon="undefined" text="" class="backbutton">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="segmentarea" >
+		 <div class="btnarea " (click)="loginin()" >
+		Login
+		 </div>
+		  <div class="btnarea btnareaactive" >
+	Register
+		 </div>
+		 </div>
+</ion-header>
+ 
+ <!-- <ion-segment mode="md" value="map" [(ngModel)]="segmentModel" (ionChange)="segmentChanged($event)"> -->
+    <!-- <ion-segment-button value="one"> -->
+      <!-- <ion-label>Login</ion-label> -->
+    <!-- </ion-segment-button> -->
+    <!-- <ion-segment-button value="two"> -->
+      <!-- <ion-label>Register</ion-label> -->
+    <!-- </ion-segment-button> -->
+  <!-- </ion-segment> -->
+<ion-content>
+
+  <form [formGroup]="registerForm">
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+
+          <ion-item shape="round">
+            <ion-input placeholder="First name" type="text" formControlName="firstname"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.firstname.valid  && (registerForm.controls.firstname.dirty || registerForm.get('firstname').touched)">
+            Please enter your first name.</p>
+
+
+          <ion-item shape="round">
+            <ion-input placeholder="Last name" type="text" formControlName="lastname"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.lastname.valid  && (registerForm.controls.lastname.dirty || registerForm.get('lastname').touched)">
+            Please enter your last name.</p>
+
+          <ion-item shape="round">
+            <ion-input placeholder="E-mail address" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty ||  registerForm.get('email').touched)">
+            Please enter a valid email.</p>
+
+          <ion-item shape="round">
+            <ion-input placeholder="Contact number" type="number" formControlName="number"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.number.valid  && (registerForm.controls.number.dirty ||  registerForm.get('number').touched)">
+            Please enter your contact no.</p>
+
+     <ion-item class="newselect">
+            <ion-label style="display:none;">Age</ion-label>
+            
+            <ion-select placeholder="Age (Optional)" formControlName="age">
+            <ion-select-option value = "3">Below 20</ion-select-option>
+            <ion-select-option value = "4"> 20-29</ion-select-option>
+            <ion-select-option value = "5">30-39</ion-select-option>
+            <ion-select-option value = "6">40-49</ion-select-option>
+            <ion-select-option value = "7">Above 50</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="newselect">
+            <ion-label style="display:none;">Employment status</ion-label>
+            <ion-select placeholder="Employment status (Optional)" formControlName="empStatus" >
+            <ion-select-option value = "1">Employed</ion-select-option>
+            <ion-select-option value = "2">Self-employed</ion-select-option>
+            <ion-select-option value = "3">Student</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item shape="round">
+            <ion-input placeholder="Company name (Optional)" formControlName="campanyName"></ion-input>
+          </ion-item>
+
+          <ion-item shape="round">
+            <ion-input placeholder="Password" type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty ||  registerForm.get('password').touched)">
+            Please enter a minimum 8 character password.</p>
+
+          <ion-item shape="round">
+            <ion-input placeholder="Confirm password" type="password" formControlName="confirmPassword"></ion-input>
+          </ion-item>
+
+
+          <p class='error'
+            *ngIf="registerForm.controls.confirmPassword.touched && registerForm.hasError('mismatchedPasswords') && (registerForm.controls.confirmPassword.dirty ||  registerForm.get('confirmPassword').touched)">
+            Password and Confirm Password fields should match</p>
+
+
+
+          <ion-button class="newsearch" (click)="submitForm()" shape="round" [disabled]="!registerForm.valid"
+            expand="full">Register now<img src="assets/images/icons/arrow_white.svg" /></ion-button>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </form>
+
+
+
+
+
+ 
+      <!-- <ion-row>
+        <ion-col size="12">
+          <div class="newitem">
+
+            <ion-item shape="round">
+              <ion-input placeholder="First name" type="text" ></ion-input>
+            </ion-item>
+           
+            <ion-item shape="round">
+              <ion-input placeholder="Last name" type="text" ></ion-input>
+            </ion-item>
+          
+            <ion-item shape="round">
+              <ion-input placeholder="E-mail address" type="email" ></ion-input>
+            </ion-item>
+           
+            <ion-item shape="round">
+              <ion-input placeholder="Contact number" type="tel" inputmode="numeric" ></ion-input>
+            </ion-item>
+         
+	  <ion-item class="newselect">
+  <ion-label style="display:none;">Age</ion-label>
+  
+  <ion-select placeholder="Age (Optional) ">
+	<ion-select-option >Below 20</ion-select-option>
+	<ion-select-option > 20-29</ion-select-option>
+	<ion-select-option >30-39</ion-select-option>
+	<ion-select-option >40-49</ion-select-option>
+	<ion-select-option >Above 50</ion-select-option>
+  </ion-select>
+</ion-item>
+            <ion-item class="newselect">
+  <ion-label style="display:none;">Employment status</ion-label>
+  
+  <ion-select placeholder="Employment status (Optional) " >
+	<ion-select-option >Employed</ion-select-option>
+	<ion-select-option >Self-employed</ion-select-option>
+	<ion-select-option >Student</ion-select-option>
+  </ion-select>
+</ion-item>
+
+            
+            <ion-item shape="round">
+              <ion-input placeholder="Company name (Optional)" ></ion-input>
+            </ion-item>
+
+            <ion-item shape="round">
+              <ion-input placeholder="Create a password" type="password" ></ion-input>
+            </ion-item>
+           
+
+            <ion-item shape="round">
+              <ion-input placeholder="Confirm password" type="password" ></ion-input>
+            </ion-item>
+
+            <ion-button class="newsearch" (click)="credit()" shape="round" 
+              expand="full">Resister now<img src="assets/images/icons/arrow_white.svg" /></ion-button>
+
+          </div>
+        </ion-col>
+      </ion-row> -->
+
+
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/home' icon="undefined" text="" class="backbutton">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+   <div class="segmentarea">
+		 <div class="btnarea btnareaactive" >
+		Login
+		 </div>
+		  <div class="btnarea " (click)="register()">
+	Register
+		 </div>
+		 </div>
+</ion-header>
+
+ <!-- <ion-segment mode="md" value="map" [(ngModel)]="segmentModel" (ionChange)="segmentChanged($event)"> -->
+    <!-- <ion-segment-button value="one"> -->
+      <!-- <ion-label>Login</ion-label> -->
+    <!-- </ion-segment-button> -->
+    <!-- <ion-segment-button value="two"> -->
+      <!-- <ion-label>Register</ion-label> -->
+    <!-- </ion-segment-button> -->
+  <!-- </ion-segment> -->
+<ion-content>
+ 
+
+  
+  <form [formGroup]="loginForm">
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+          <ion-item shape="round">
+            <img slot="start" src="assets/images/icons/e-mail.svg" />
+            <ion-input placeholder="E-mail address" formControlName="email"></ion-input>
+          </ion-item>
+
+          <p class="error"
+            *ngIf="!loginForm.controls.email.valid  && (loginForm.controls.email.dirty || loginForm.get('email').touched)">
+            Please enter a valid email.</p>
+
+
+          <ion-item shape="round">
+            <img slot="start" src="assets/images/icons/password.svg" />
+            <ion-input type='password' placeholder="password" formControlName="password"></ion-input>
+            <p slot="end" (click)="forgot()">Forgot password?</p>
+          </ion-item>
+
+          <p class="error"
+            *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || loginForm.get('password').touched)">
+            Password required.</p>
+            <ion-button class="newsearch" shape="round" expand="full" (click)="login()" >
+              Login<img src="assets/images/icons/arrow_white.svg" /></ion-button>
+
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- <div class="recommend" *ngIf="removeGuest!==true">
+       
+        <ion-row>
+          <ion-col size="12">
+            <div class="recommendin">
+              <h2>Guest</h2>
+              <p>Continue without signing in. You will be required to purchase <b>15 Credits</b> to pay for your
+                booking.</p>
+              <ion-button class="newbtn" shape="round" expand="full" (click)="guestLogin()">Continue as Guest<img
+                  src="assets/images/icons/arrow_white.svg" /></ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div> -->
+      </form>
+   
+
+</ion-content>

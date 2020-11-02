@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "547810512170",
+    "firebase_url": "https://deskapade-290206.firebaseio.com",
+    "project_id": "deskapade-290206",
+    "storage_bucket": "deskapade-290206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547810512170:android:e9e2ddabfda9974bb22253",
+        "android_client_info": {
+          "package_name": "com.tdd.deskapade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547810512170-e7tj6b92lujn3tasf96cjq2805fgcs6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQPtYASOGK8SHqmlzUtZMnoVrkOhRt-BU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547810512170-e7tj6b92lujn3tasf96cjq2805fgcs6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12">
+      <div class="heading">
+        <h2>Verification Code</h2>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <form [formGroup]="otpgroup">
+        <div class="code">
+          <ion-row>
+            <ion-col size="12">
+              <p> 6-digit code has been sent to {{email}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2">
+                <ion-item>
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p1" (keyup)="next($event,otp2,'')" #otp1
+                    type="tel"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2">
+                <ion-item>
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p2" (keyup)="next($event,otp3,otp1)"
+                    #otp2 type="tel"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2">
+                <ion-item>
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p3" (keyup)="next($event,otp4,otp2)"
+                    #otp3 type="tel"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2">
+                <ion-item>
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p4" (keyup)="next($event,otp5,otp3)"
+                    #otp4 type="tel"></ion-input>
+                </ion-item>
+
+              </ion-col>
+              <ion-col size="2">
+                <ion-item>
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p5" (keyup)="next($event,otp6,otp4)"
+                    #otp5 type="tel"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2">
+                <ion-item>
+
+                  <ion-input inputmode="numeric" maxlength="1" size="1" formControlName="p6" (keyup)="next($event,'',otp5)" #otp6
+                    type="tel"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-row>
+            <ion-col>
+              <p id="resOtp" (click)="resendOTP()">Resend OTP</p>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+      
+    </ion-col>
+  </ion-row>
+  <ion-button expand="full" shape="round" (click)="verifyOTP()" class="newsearch">Verify<img
+      src="assets/images/icons/arrow_white.svg" /></ion-button>
+</ion-content>

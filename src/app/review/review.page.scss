@@ -1,0 +1,174 @@
+.header-md ion-title
+{
+text-align:center;
+}
+.rating {
+    ion-icon.filled[_ngcontent-tjt-c164] {
+        color: rgb(0, 0, 0);
+    }
+  }
+.header-ios .toolbar-ios:last-child .toolbar-background-ios
+{
+border:0;
+}
+.newcontentbg
+{
+    --background: #f1f1f1;
+}
+
+.header-md::after
+{
+background:transparent;
+}
+
+.header-ios ion-toolbar:last-of-type
+{
+--border-width: 0 0 0;
+}
+
+ion-toolbar
+{--background:transparent;
+}
+.header-ios ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+	.header-md ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+
+.newarea
+{
+width:100%;
+height:auto;
+padding:0 15px;
+}
+
+.star
+{
+width:100%;
+text-align:center;
+margin-top:25px;
+}
+
+.newstar
+{
+display: inline-flex;
+margin-right:6px;
+font-size:45px;
+    text-align: center;
+}
+
+.newclose
+{
+background-color:transparent;
+font-size:32px;
+float:right;
+
+}
+
+.head
+{
+width:100%;
+height:auto;
+font-size:16px;
+text-align:center;
+margin:0 auto;
+}
+
+.newtextarea
+{
+--padding-start: 10px;
+    --background: #f1f1f1;
+    --border-radius: 4px;
+    font-size: 16px;
+    --border-width: 0 0 0px 0;
+    --inner-border-width: 0px 0px 0px 0px;
+}
+
+
+.newsearch
+{
+color:#ffffff !important;
+--border-radius: 6px;
+font-size:16px;
+height:56px;
+-ion-color-contrast: var(--ion-color-light-contrast, #000000) !important;
+ font-family: 'Heebo';
+--background: #000000;
+--background-activated: #000000;
+    --background-focused: #000000;
+    --background-hover: #000000;
+    --background-activated-opacity: 1;
+    --background-focused-opacity: 1;
+    --background-hover-opacity: 1;
+width:90%;
+ font-weight:500;
+ letter-spacing: -0.5px;
+text-transform: inherit;
+
+margin:20px auto 25px;
+
+text-align:center;
+
+--box-shadow: none;
+
+}
+
+.newsearch img{
+padding-left:10px;
+width:28px;
+}
+.newradio
+{
+width:100%;
+margin-top:25px;
+}
+
+.newradio ion-item
+{
+width:100%;
+--inner-border-width: 0px 0px 0px 0px;
+    align-items: start;
+	--padding-start:  0;
+	margin-bottom:15px;
+}
+
+.newradio ion-label
+{
+white-space:inherit;
+margin-top:0;
+}
+ion-radio
+{
+    width: 24px;
+    height: 24px;
+    border: 1px solid #000;
+    border-radius: 250px;
+	    padding: 0 5px;
+
+}
+
+
+
+:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+
+
+.radio-checked 
+{
+    --color-checked: #fff;
+	background-color: #000;
+	
+}

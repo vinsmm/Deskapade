@@ -1,0 +1,166 @@
+<ion-header>
+  <div class="header-background"></div>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/home/list' icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="true">
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let photo of vendorData.photo">
+      <img src="{{photo.photo}}" />
+    </ion-slide>
+  </ion-slides>
+
+  <div class="newhome">
+    <ion-row>
+      <ion-col size="12">
+        <h2>{{vendorData.vendor_business}}</h2>
+        <h5>{{vendorData.miles}} miles</h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+          <ion-item class="newtextarea">
+            <img slot="start" src="assets/images/icons/notes.svg" />
+            <ion-textarea rows="4" cols="18" placeholder="Additional notes"  [(ngModel)]="notes"></ion-textarea>
+          </ion-item>
+
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+          <ion-item class="locationatrea" shape="round">
+            <img slot="start" src="assets/images/icons/promo.svg" />
+            <ion-input placeholder="Promo code" [(ngModel)]="promocode" (keyup)="checkCode()">
+            </ion-input>
+            <ion-button *ngIf="showApplyFlag==true" slot="end" class="newlocation" shape="round" expand="full"
+              (click)="applyPromo()">
+              <img src="assets/images/icons/chevron-rightwhite.svg" />
+            </ion-button>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+          <ion-item class="newselect">
+            <img slot="start" src="assets/images/icons/promo.svg" />
+            <ion-input placeholder="Promo code"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row> -->
+  </div>
+  <div class="newline">
+    <ion-row>
+      <ion-col size="12">
+        <h2>You are about to book...</h2>
+      </ion-col>
+    </ion-row>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Type</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4 class="ion-text-capitalize">{{vendorData.location_type_name}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Location</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{vendorData.vendor_addr1}}, {{vendorData.vendor_addr2}}, {{vendorData.vendor_town}},
+              {{vendorData.vendor_postcode}}, {{vendorData.vendor_country}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Time</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{vendorData.min_hours}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbookin">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Total amount</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4 *ngIf="promoAppliedFlag==false">{{credits}} credits</h4>
+            <h4 *ngIf="promoAppliedFlag==true">{{promoAmt}} credits</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="vendorData.booking_type=='12'">
+        <ion-col size="12">
+          <span class="newlines">
+            Note:- Your table may be allocated to somebody else if you arrive 15 minutes later than the start time of your scheduled reservation
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="vendorData.booking_type!='12'">
+        <ion-col size="12">
+          <span class="newlines">
+            Note:- You will lose your credit if you do not cancel your reservation within  {{vendorData.cancel_time}} 
+            <span *ngIf="vendorData.is_cancel_type=='2'">hours</span> <span
+              *ngIf="vendorData.is_cancel_type=='1'">Days</span> of your scheduled
+              <span *ngIf="vendorData.booking_type!='4'">time</span> <span
+              *ngIf="vendorData.booking_type=='4'">date</span>
+          </span>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col size="12">
+         <span class="newlines">
+          Note:- Cancellation charges will apply if the booking is cancelled within {{vendorData.cancel_time}} <span *ngIf="vendorData.is_cancel_type=='2'">hour/s</span> <span *ngIf="vendorData.is_cancel_type=='1'">Day/s</span> of your scheduled reservation start time 
+         </span>
+        </ion-col>
+      </ion-row> -->
+    </div>
+    <ion-row *ngIf="promoAppliedFlag == true">
+      <ion-col size="12">
+        <ion-button class="newsearch" shape="round" expand="full" (click)="checkPromoValid()">Confirm booking<img
+            src="assets/images/icons/arrow_white.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="promoAppliedFlag == false">
+      <ion-col size="12">
+        <ion-button class="newsearch" shape="round" expand="full" (click)="confirmBooking()">Confirm booking<img
+            src="assets/images/icons/arrow_white.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

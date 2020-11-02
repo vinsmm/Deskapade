@@ -1,0 +1,163 @@
+.header-md ion-title
+{
+text-align:center;
+}
+.header-ios .toolbar-ios:last-child .toolbar-background-ios
+{
+border:0;
+
+}
+
+
+.header-md::after
+{
+background:transparent;
+}
+
+.header-ios ion-toolbar:last-of-type
+{
+--border-width: 0 0 0;
+}
+
+ion-title img
+{
+width:158px;
+margin-top:15px;
+}
+
+.header-ios ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+	.header-md ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+			.newsearch
+{
+color:#ffffff !important;
+--border-radius: 6px;
+font-size:16px;
+height:56px;
+-ion-color-contrast: var(--ion-color-light-contrast, #000000) !important;
+ font-family: 'Heebo';
+--background: #000000;
+--background-activated: #000000;
+    --background-focused: #000000;
+    --background-hover: #000000;
+    --background-activated-opacity: 1;
+    --background-focused-opacity: 1;
+    --background-hover-opacity: 1;
+width:85%;
+ font-weight:500;
+ letter-spacing: -0.5px;
+
+text-transform: inherit;
+display:inline-block;
+margin:0 auto 35px;
+
+text-align:center;
+--box-shadow:none;
+
+}
+.backbutton
+{
+background-image: url(/assets/images/icons/arrow-left.svg);
+width:25px;
+background-position: 50% 50%;
+background-repeat: no-repeat;
+height:25px;
+
+}
+.sc-ion-buttons-md-s .button {
+margin-left:0;
+}
+
+.sc-ion-buttons-ios-s .button {
+margin-left:4px;
+}
+
+.newsearch img{
+padding-left:10px;
+width:28px;
+}
+
+.profile
+{
+width:100%;
+height:auto;
+}
+
+.profile ion-item
+{
+min-height:60px;
+--inner-border-width: 0px 0px 0 0px;
+border-bottom: 1px solid #ddd;
+}
+
+.profile ion-label
+{
+margin-top: 17px;
+    margin-bottom: 17px;
+	white-space:inherit;
+	font-size:16px;
+	}
+	.newlabel
+	{
+	text-align:right;
+	float:right;
+	}
+	
+	.profile span
+	{
+	font-weight:400;
+	color:#ccc;
+	}
+	
+	ion-title
+{
+color:#000000;
+font-size:20px;
+left: 0px;
+    top: 0px;
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0px);
+font-weight: 500;
+    text-align: center;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.newbottom
+{
+width:100%;
+height:auto;
+margin:45px auto 25px;
+text-align:center;
+}
+#loginbox{
+    text-align: center;; 
+   //  background-color: #eee; /* fallback color if gradients are not supported */
+   display: block;
+   padding: 1px 0 0 0;
+   border-top: 1pt solid lightgrey; 
+   border-bottom: 1pt solid lightgrey; 
+   
+   ion-label{
+       margin: 5pt 0pt;
+   }
+    
+}

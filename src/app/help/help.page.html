@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/menu' icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Help & Support</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="faq">
+    <ion-card class="newcard" *ngFor="let item of faqList; let i=index"> 
+      <ion-row   (click)="toggleGroup(i)">
+        <ion-col size="11" text-left>
+          <h5 class="newhead">{{item.question}}</h5>
+        </ion-col>
+        <ion-col size="1">
+          <div class="newicon">
+            <ion-icon tappable class="cent" [ngClass]="{active: isGroupShown(i)}" item-right
+              [name]="isGroupShown(i) ? 'remove-outline' : 'add-outline'"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="isGroupShown(i)">
+        <ion-row>
+          <ion-col size="12">
+            <div class="newcontentin">
+              <p>{{item.answer}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  
+    <!-- <ion-card class="newcard">
+      <ion-row (click)="toggleGroup1(j)">
+        <ion-col size="11" text-left>
+          <h5 class="newhead">Why coffee shops table can be booked for up to two hours only?</h5>
+        </ion-col>
+        <ion-col size="1">
+          <div class="newicon">
+            <ion-icon tappable class="cent" [ngClass]="{active: isGroupShown1(j)}" item-right
+              [name]="isGroupShown1(j) ? 'remove-outline' : 'add-outline'"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="isGroupShown1(j)">
+        <ion-row>
+          <ion-col size="12">
+            <div class="newcontentin">
+              <p>these are free spaces, and we want many users to be able to benefit from this option. That is why we limited the time that each user can book this space for.</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card> -->
+  </div>
+
+
+</ion-content>
+<div class="bottom">
+  <ion-button expand="full" shape="round" class="newsearch" (click)="supportEmail()">E-mail support<img
+      src="assets/images/icons/questionwhite.svg" /></ion-button>
+</div>

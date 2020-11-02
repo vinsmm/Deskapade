@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="cardvals">
+      <div class="newitem">
+        <div class="newinputline">
+
+          <ion-label position="stacked" color="primary" stacked>Name on card</ion-label>
+          <ion-input class="ion-text-capitalize" type="text"  placeholder="Enter your Name" formControlName="crdname" >
+          </ion-input>
+
+        </div>
+        <div class="newinputline">
+
+          <ion-label position="stacked" color="primary" stacked>Card Number</ion-label>
+          <ion-input type="tel" maxlength="19" placeholder="Enter your 16 digit card number" formControlName="crdnum" (ionChange)="formatCard($event.target.value)" [(ngModel)]="creditCardNumber">
+          </ion-input>
+
+        </div>
+        <div class="newinputline">
+          <ion-label position="stacked" color="primary" stacked>Expiration Month/Year</ion-label>
+          <ion-input class="newinput" maxlength=2 type="tel" placeholder="MM" formControlName="expmnth"></ion-input>
+          
+          <ion-input class="newinput" maxlength=4 type="tel" placeholder="YYYY" formControlName="expyr"></ion-input>
+        </div>
+    
+        <div class="newinputline">
+          <ion-label position="stacked">CVV</ion-label>
+          <ion-input type="password" inputmode='numeric'  maxlength="3" placeholder="Enter your CVV" formControlName="cvvnum"></ion-input>
+        </div>
+        <ion-button class="newsearch" (click)="validateCard()" shape="round" [disabled]="!cardvals.valid" expand="full">
+          Proceed To Pay<img src="assets/images/icons/arrow_white.svg" /></ion-button>
+      </div>
+    </form>
+
+  </ion-list>
+
+
+  <!-- <button ion-button block large (click)="validateCard()">Add Card</button> -->
+</ion-content>
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="cardvals">
+      <div class="newitem">
+        <ion-item>
+          <ion-label color="primary" stacked>Card Number</ion-label>
+          <ion-input type="tel" maxlength="16"placeholder="Enter your 16 digit card number" formControlName="crdnum"></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-label color="primary" stacked>Expiration Month/year</ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+
+                  <ion-input type="number" placeholder="month" formControlName="expmnth"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+
+                  <ion-input type="number" placeholder="year" formControlName="expyr"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-item>
+          <ion-label color="primary" stacked>CVV</ion-label>
+          <ion-input type="password" maxlength="3"  placeholder="Enter your CVV" formControlName="cvvnum"></ion-input>
+        </ion-item>
+        <ion-button class="newsearch" (click)="validateCard()" shape="round" [disabled]="!cardvals.valid" expand="full">Add
+          Card<img src="assets/images/icons/arrow_white.svg" /></ion-button>
+      </div>
+    </form>
+
+  </ion-list>
+</ion-content> -->

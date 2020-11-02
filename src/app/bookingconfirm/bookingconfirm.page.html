@@ -1,0 +1,126 @@
+<ion-content>
+  <ion-list class="newhead">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/images/icons/check-1.svg">
+      </ion-avatar>
+      <ion-label>
+        <h2>Booking confirmed!</h2>
+        <p>Thanks for booking with us</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="newline">
+    <ion-row>
+      <ion-col size="12">
+        <h2>Your booking summary:</h2>
+      </ion-col>
+    </ion-row>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Type</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.location_type_name}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Location</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.vendor_addr1}}, {{bookingData.vendor_addr2}}, {{bookingData.vendor_town}},
+              {{bookingData.vendor_postcode}}, {{bookingData.vendor_country}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Date</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.booking_date}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Time</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.min_hours}}</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbook">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>No.of people</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.total_persons}} persons</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="newbookin">
+      <ion-row>
+        <ion-col size="4">
+          <div class="newlines">
+            <p>Total amount</p>
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <div class="newlines">
+            <h4>{{bookingData.total_amt}}credits</h4>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="newsearch" shape="round" expand="full" (click)="share()">Share this booking<img
+            src="assets/images/icons/sharewhite.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="newsearch" shape="round" expand="full" (click)="credit()">Add more Credits<img
+            src="assets/images/icons/credits-filledwhite.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="newsearch" shape="round" expand="full" (click)="close()">Return to Home<img
+            src="assets/images/icons/arrow_white.svg" /></ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

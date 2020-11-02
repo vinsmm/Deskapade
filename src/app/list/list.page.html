@@ -1,0 +1,160 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref='/tabs/home' icon="undefined" text="" class="backbutton"></ion-back-button>
+		</ion-buttons>
+		<ion-segment slot="end" mode="ios" value="map" [(ngModel)]="segmentModel" (ionChange)="segmentChanged($event)">
+			<ion-segment-button value="list">
+				<ion-label>List</ion-label>
+			</ion-segment-button>
+			<ion-segment-button value="map">
+				<ion-label>Map</ion-label>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="newbg">
+	<div class="newtab" *ngIf="segmentModel === 'list'">
+		<ion-row *ngFor="let item of venueList">
+			<ion-col size="12">
+				<ion-card (click)="getDetails(item)">
+					<img src="{{item.photo}}" />
+					<div class="newbottom">
+						<ion-row>
+							<ion-col size="12">
+								<div class="newtitle">
+									<h4>{{item.vendor_business}}</h4>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col size="8">
+								<div class="newtitlein">
+									<p>{{item.miles}} miles</p>
+								</div>
+							</ion-col>
+							<ion-col size="4">
+								<div class="newtitlein">
+									<h6>{{item.caltulateRate}} <img src="assets/images/icons/credits_white.svg" /></h6>
+									<img src="assets/images/icons/chevron-rightwhite.svg" />
+								</div>
+							</ion-col>
+						</ion-row>
+					</div>
+				</ion-card>
+				<!-- <ion-card>
+<img src="assets/images/office.jpg"/>
+<div class="newbottom">
+ <ion-row>
+     <ion-col size="12">
+	 <div class="newtitle">
+    <h4>Opal House offices</h4>
+	</div>
+	</ion-col>
+	</ion-row> 
+	 <ion-row>
+	<ion-col size="8">
+    <div class="newtitlein">
+    <p>1.6miles </p>
+	</div>
+	</ion-col>
+	<ion-col size="4">
+    <div class="newtitlein">
+    <h6>15 <img src="assets/images/icons/credits_white.svg"/></h6>
+	<img src="assets/images/icons/chevron-rightwhite.svg"/>
+	</div>
+	</ion-col>
+ </ion-row> 
+	</div>
+  </ion-card>
+     <ion-card>
+<img src="assets/images/officetwo.jpg"/>
+<div class="newbottom">
+ <ion-row>
+     <ion-col size="12">
+	 <div class="newtitle">
+    <h4>Beaumont House</h4>
+	</div>
+	</ion-col>
+	</ion-row> 
+	 <ion-row>
+	<ion-col size="8">
+    <div class="newtitlein">
+    <p>1.8miles </p>
+	</div>
+	</ion-col>
+	<ion-col size="4">
+    <div class="newtitlein">
+    <h6>15 <img src="assets/images/icons/credits_white.svg"/></h6>
+	<img src="assets/images/icons/chevron-rightwhite.svg"/>
+	</div>
+	</ion-col>
+ </ion-row> 
+	</div>
+  </ion-card>
+   <ion-card>
+<img src="assets/images/coffeetwo.jpg"/>
+<div class="newbottom">
+ <ion-row>
+     <ion-col size="12">
+	 <div class="newtitle">
+    <h4>The Brew House</h4>
+	</div>
+	</ion-col>
+	</ion-row> 
+	 <ion-row>
+	<ion-col size="8">
+    <div class="newtitlein">
+    <p>1.9miles </p>
+	</div>
+	</ion-col>
+	<ion-col size="4">
+    <div class="newtitlein">
+    <h6>15 <img src="assets/images/icons/credits_white.svg"/></h6>
+	<img src="assets/images/icons/chevron-rightwhite.svg"/>
+	</div>
+	</ion-col>
+ </ion-row> 
+	</div>
+  </ion-card> -->
+
+			</ion-col>
+		</ion-row>
+	</div>
+
+	<div   *ngIf="segmentModel === 'map'">
+		<div #map id="map"></div>
+		<!-- <ion-row>
+			<ion-col size="12">
+				<div class="newcard">
+					<ion-card (click)="detailin()">
+						<img src="assets/images/img2.jpg" />
+						<div class="newbottom">
+							<ion-row>
+								<ion-col size="12">
+									<div class="newtitle">
+										<h4>Alex's Coffee House</h4>
+									</div>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="8">
+									<div class="newtitlein">
+										<p>1.2miles </p>
+									</div>
+								</ion-col>
+								<ion-col size="4">
+									<div class="newtitlein">
+										<h6>15 <img src="assets/images/icons/credits_white.svg" /></h6>
+										<img src="assets/images/icons/chevron-rightwhite.svg" />
+									</div>
+								</ion-col>
+							</ion-row>
+						</div>
+					</ion-card>
+				</div>
+			</ion-col>
+		</ion-row> -->
+	</div>
+</ion-content>

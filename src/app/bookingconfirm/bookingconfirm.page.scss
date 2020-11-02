@@ -1,0 +1,144 @@
+.newline
+{
+width:100%;
+height:auto;
+float:left;
+padding:0 15px;
+margin-bottom:25px;
+}
+
+.newline h2
+{
+width:100%;
+  height:auto;
+  float:left;
+  text-align:left;
+  color:#000;
+  line-height:20px;
+  font-weight:bold;
+  font-size:16px;
+  letter-spacing: -0.25px;
+  margin:30px 0 10px 0;
+  vertical-align:middle;
+}
+
+
+
+.newhead
+{
+margin-top:62px;
+}
+
+.newbook
+{
+width:100%;
+height:auto;
+border-bottom:1px solid #ddd;
+}
+
+.newbookin
+{
+width:100%;
+height:auto;
+border-bottom:none;
+}
+.newlines
+{width:100%;
+height:auto;
+float:left;
+}
+
+.newlines p
+{width:100%;
+height:auto;
+float:left;
+font-size:14px;
+line-height:21px;
+letter-spacing:-0.5px;
+font-weight:500;
+}
+
+.newlines h4
+{width:100%;
+height:auto;
+float:left;
+font-size:14px;
+font-weight:400;
+line-height:21px;
+letter-spacing:-0.5px;
+text-align:right;
+}
+
+.newsearch
+{
+color:#ffffff !important;
+--border-radius: 6px;
+font-size:16px;
+height:56px;
+-ion-color-contrast: var(--ion-color-light-contrast, #000000) !important;
+ font-family: 'Heebo';
+--background: #000000;
+--background-activated: #000000;
+    --background-focused: #000000;
+    --background-hover: #000000;
+    --background-activated-opacity: 1;
+    --background-focused-opacity: 1;
+    --background-hover-opacity: 1;
+width:100%;
+ font-weight:500;
+ letter-spacing: -0.5px;
+text-transform: inherit;
+display:inline-block;
+margin:5px auto 0px;
+
+text-align:center;
+
+-webkit--box-shadow: -10px 27px 71px -8px rgba(0,0,0,0.75);
+-moz--box-shadow: -10px 27px 71px -8px rgba(0,0,0,0.75);
+--box-shadow: -10px 27px 71px -8px rgba(0,0,0,0.75);
+
+}
+
+.newsearch img{
+padding-left:10px;
+width:28px;
+}
+
+.newhead
+{
+width:100%;
+height:auto;
+float:left;
+border-bottom:1px solid #ddd;
+}
+
+.newhead .item
+{
+--inner-border-width: 0 0 0px 0;
+}
+
+.newhead h2{
+width:100%;
+height:auto;
+font-size:24px;
+font-weight:bold;
+margin-bottom:6px;
+margin-top:10px;
+letter-spacing: -0.5px;
+}
+
+.newhead p{
+width:100%;
+height:auto;
+font-size:14px;
+font-weight:400;
+margin-bottom:6px;
+margin-top:0;
+letter-spacing: -0.5px;
+}
+
+ ion-avatar
+ {
+ width:55px;
+ height:55px;
+ }

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/menu' icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="loggedIn!='true'" style="margin-top: 53%;">
+    <ion-row>
+      <ion-col size=3></ion-col>
+      <ion-col size=6 (click)="loginnow()">
+        <div id="loginbox">
+          <ion-label style="font-size: 20pt;color: #000000;font-weight: bold;">
+            Login
+          </ion-label>
+        </div>
+      </ion-col>
+      <ion-col size=3></ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="loggedIn=='true'">
+    <ion-row>
+      <ion-col size="12">
+        <div class="profile">
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-label class="newlabel">{{name}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-label class="newlabel">{{email}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Contact no.</ion-label>
+            <ion-label class="newlabel">{{phone}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Age <span>(Optional)</span></ion-label>
+            <ion-label class="newlabel">{{age}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Employment status <span>(Optional)</span></ion-label>
+            <ion-label class="newlabel">{{ocupation}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Company name <span>(Optional)</span></ion-label>
+            <ion-label class="newlabel">{{company}}</ion-label>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="newbottom">
+          <ion-button class="newsearch" shape="round" expand="full" (click)="edit()">Update details<img
+              src="assets/images/icons/arrow_white.svg" /></ion-button>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </div>
+</ion-content>

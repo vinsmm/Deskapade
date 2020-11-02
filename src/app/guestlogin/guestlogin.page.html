@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/login' icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-title>Guest Checkout</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loginmain">
+    <h2>Guest checkout</h2>
+  </div>
+  <form [formGroup]="registerForm">
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+
+          <ion-item shape="round">
+            <ion-input placeholder="First name" type="text" formControlName="firstname"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.firstname.valid  && (registerForm.controls.firstname.dirty || registerForm.get('firstname').touched)">
+            Please enter your first name.</p>
+
+
+          <ion-item shape="round">
+            <ion-input placeholder="Last name" type="text" formControlName="lastname"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.lastname.valid  && (registerForm.controls.lastname.dirty || registerForm.get('lastname').touched)">
+            Please enter your last name.</p>
+
+          <ion-item shape="round">
+            <ion-input placeholder="E-mail address" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty ||  registerForm.get('email').touched)">
+            Please enter a valid email.</p>
+
+          <ion-item shape="round">
+            <ion-input placeholder="Contact number" type="number" formControlName="number"></ion-input>
+          </ion-item>
+          <p class="error"
+            *ngIf="!registerForm.controls.number.valid  && (registerForm.controls.number.dirty ||  registerForm.get('number').touched)">
+            Please enter your contact no.</p>
+          <ion-button class="newsearch" shape="round" expand="full" (click)="submitForm()" [disabled]="!registerForm.valid">Continue as Guest<img
+              src="assets/images/icons/arrow_white.svg" /></ion-button>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

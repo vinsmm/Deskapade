@@ -1,0 +1,77 @@
+ion-tab-button .home
+	 {
+	 background-image: url(/assets/images/icons/home_grey.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button.tab-selected .home
+	 {
+	 background-image: url(/assets/images/icons/home.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button .calender
+	 {
+	 background-image: url(/assets/images/icons/calendar_grey.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button.tab-selected .calender
+	 {
+	 background-image: url(/assets/images/icons/calendar.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button .credit
+	 {
+	 background-image: url(/assets/images/icons/credits_grey.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button.tab-selected .credit
+	 {
+	 background-image: url(/assets/images/icons/credits.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 	 ion-tab-button .menu
+	 {
+	 background-image: url(/assets/images/icons/menu_grey.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+	 ion-tab-button.tab-selected .menu
+	 {
+	 background-image: url(/assets/images/icons/menu.svg);
+	width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	 }
+	 
+ ion-tab-bar
+	 {
+	 height:62px;
+	
+	 }

@@ -1,0 +1,345 @@
+.header-md ion-title
+{
+text-align:center;
+}
+
+.header-ios .toolbar-ios:last-child .toolbar-background-ios
+{
+border:0;
+
+}
+.error {
+    font-size: 0.8em;
+    color: red !important;
+ 	margin-bottom: 15px !important;
+	margin-top:6px !important;
+}
+
+.header-md::after
+{
+background:transparent;
+}
+
+.header-ios ion-toolbar:last-of-type
+{
+--border-width: 0 0 0;
+}
+ion-title
+{
+color:#2F1153;
+font-size:20px;
+left: 0px;
+    top: 0px;
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0px);
+font-weight: 500;
+    text-align: center;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.backbutton
+{
+background-image: url(/assets/images/icons/arrow-left.svg);
+width:25px;
+background-position: 50% 50%;
+background-repeat: no-repeat;
+height:25px;
+
+}
+.sc-ion-buttons-md-s .button {
+margin-left:0;
+}
+
+.sc-ion-buttons-ios-s .button {
+margin-left:4px;
+}
+
+ion-toolbar
+{--background:transparent;
+}
+.header-ios ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+	.header-md ion-toolbar
+{
+--padding-top: 3px;
+    --padding-bottom: 3px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --min-height:75px;}
+	
+	ion-segment-button
+	{
+	text-transform:inherit;
+	}
+	
+	.segmentarea
+ {
+ width:100%;
+ height:auto;
+ background:#fff !important;
+ }
+ 
+ 
+ .btnarea
+ {
+ --background: none;
+    --background-checked: none;
+    --background-hover: #000000;
+    --background-focused: #000000;
+    --background-activated-opacity: 0;
+    --background-focused-opacity: 0.12;
+    --background-hover-opacity: 0.04;
+    color: #ddd;
+    --color-checked: #000000;
+    --indicator-box-shadow: none;
+    --indicator-color: #000000;
+    --indicator-height: 2px;
+    --indicator-transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --indicator-transform: none;
+    --padding-top: 0;
+    --padding-end: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --transition: color 0.15s linear 0s, opacity 0.15s linear 0s;
+    min-width: 90px;
+  
+    min-height: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 40px;
+    text-transform: inherit;
+	  width: 50%;
+    float: left;
+	font-size:16px;
+	text-align: center;
+	border-bottom:2px solid #ddd;
+ }
+ .btnareaactive{
+ --background: white !important;
+    --background-checked: none;
+    --background-hover: #000000;
+    --background-focused: #000000;
+    --background-activated-opacity: 0;
+    --background-focused-opacity: 0.12;
+    --background-hover-opacity: 0.04;
+   
+    --color-checked: #000000;
+	color: #000;
+    --indicator-box-shadow: none;
+    --indicator-color: #000000;
+    --indicator-height: 2px;
+    --indicator-transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --indicator-transform: none;
+    --padding-top: 0;
+    --padding-end: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --transition: color 0.15s linear 0s, opacity 0.15s linear 0s;
+    min-width: 90px;
+    min-height: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 40px;
+	border-bottom:2px solid #000;
+    text-transform: inherit;}
+ 
+	
+ion-segment-button::part(indicator)
+	{
+	opacity: 0.2;
+	}
+	 .segment-button-checked::part(indicator)
+	 {opacity: 1;
+	 }
+	 
+	.in-segment
+	{
+	opacity: 0.4;
+	}
+	
+	.segment-button-checked
+	{opacity: 1;
+	}
+	 .newitem
+{
+width:100%;
+height:auto;
+float:left;
+margin-top:28px;
+padding:0 20px;
+}
+ 
+.newitem [slot="start"] {
+    margin-right: unset;
+    margin-inline-end: 12px;
+}
+
+.newitem ion-item
+{
+--padding-start: 15px;
+--background:#f1f1f1;
+--border-radius:4px;
+font-size: 14px;
+ --min-height: 46px;
+--border-width: 0 0 0px 0;
+margin-bottom:15px;
+--inner-border-width: 0px 0px 0px 0px;
+	}
+	
+	.newitem ion-item p{
+	font-size:12px;
+	font-weight:500;
+	}
+	
+	.newsearch
+{
+color:#ffffff !important;
+--border-radius: 6px;
+font-size:16px;
+height:56px;
+-ion-color-contrast: var(--ion-color-light-contrast, #000000) !important;
+ font-family: 'Heebo';
+--background: #000000;
+--background-activated: #000000;
+    --background-focused: #000000;
+    --background-hover: #000000;
+    --background-activated-opacity: 1;
+    --background-focused-opacity: 1;
+    --background-hover-opacity: 1;
+width:100%;
+ font-weight:500;
+ letter-spacing: -0.5px;
+
+text-transform: inherit;
+display:inline-block;
+margin:0 auto;
+
+text-align:center;
+--box-shadow:none;
+
+}
+
+.newsearch img{
+padding-left:10px;
+width:28px;
+}
+
+.recommend
+{
+width:100%;
+height:auto;
+float:left;
+background:#f1f1f1;
+margin-top:25px;
+}
+
+.recommendin
+{
+width:100%;
+height:auto;
+float:left;
+padding:15px 20px 70px 20px;
+}	
+
+.recommendin h2
+{
+width:100%;
+height:auto;
+float:left;
+font-size:24px;
+font-weight:bold;
+letter-spacing: -0.5px;
+margin-bottom:0;
+
+}
+
+.recommendin p
+{
+width:100%;
+height:auto;
+float:left;
+font-size:14px;
+font-weight:400;
+line-height:21px;
+margin-top:10px;
+letter-spacing: -0.5px;
+}
+
+.newbtn
+{
+color:#ffffff !important;
+--border-radius: 6px;
+font-size:16px;
+height:56px;
+-ion-color-contrast: var(--ion-color-light-contrast, #000000) !important;
+ font-family: 'Heebo';
+--background: #000000;
+--background-activated: #000000;
+    --background-focused: #000000;
+    --background-hover: #000000;
+    --background-activated-opacity: 1;
+    --background-focused-opacity: 1;
+    --background-hover-opacity: 1;
+width:100%;
+ font-weight:500;
+ letter-spacing: -0.5px;
+
+text-transform: inherit;
+display:inline-block;
+margin:15px auto 0;
+
+text-align:center;
+--box-shadow:none;
+
+}
+
+.newbtn img{
+padding-left:10px;
+width:28px;
+}
+
+ion-select {
+
+
+height:40px;
+
+}
+ .newselect
+  {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  }
+  
+.select-text button
+{padding:1px 0 !important;
+}
+
+.newselect .in-item {
+    position: static;
+    max-width: 100%;
+	width:100%;
+	padding-left:0;
+	padding-right:15px;
+	}
+	
+	.newselect 
+	{
+	--inner-border-width: 0px 0px 0px 0px;
+	--border-width: 0 0 0px 0;
+	
+	}
+

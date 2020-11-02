@@ -1,0 +1,73 @@
+<ion-header>
+  <div class="header-background"></div>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/home/list/amenity' icon="undefined" text="" class="backbutton"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="true">
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let photo of vendorData.photo">
+      <img src="{{photo.photo}}" />
+    </ion-slide>
+  </ion-slides>
+
+  <div class="newhome">
+    <ion-row>
+      <ion-col size="12">
+        <h2>{{vendorData.vendor_business}}</h2>
+        <h5>{{vendorData.miles}} miles</h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="newitem">
+          <p>{{vendorData.venue_desc}} </p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </div>
+  <div class="amenity">
+    <ion-card class="newcard">
+
+      <ion-row *ngIf="isGroupShown(i)">
+        <ion-col size="12" text-left>
+          <div class="newpoint">
+            <h6 *ngFor="let am of vendorData.amenity">{{am}}</h6>
+             
+          </div>
+        </ion-col>
+
+      </ion-row>
+      <div (click)="toggleGroup(i)">
+        <ion-row>
+          <ion-col size="11">
+            <div class="newcontentin">
+              <h5 class="newhead">
+                <div class="showmore" *ngIf="showmore">Show more</div>
+                <div class="showless" *ngIf="showless">Show less</div>
+                <ion-icon tappable class="cent" [ngClass]="{active: isGroupShown(i)}" item-right
+                  [name]="isGroupShown(i) ? 'remove-outline' : 'add-outline'"></ion-icon>
+              </h5>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+    </ion-card>
+    <div class="newline">
+      <ion-row>
+        <ion-col size="12">
+          <ion-button class="newsearch" shape="round" expand="full" (click)="deatil()">Book now for {{credits}} Credits<img
+              src="assets/images/icons/arrow_white.svg" /></ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
