@@ -47,6 +47,7 @@ export class ListPage implements OnInit {
 
     this.lat = localStorage.getItem('lat');
     this.long = localStorage.getItem('long')
+    console.log(this.lat, this.long)
     const location = new google.maps.LatLng(this.lat, this.long);
     const options = {
       center: location,

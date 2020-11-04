@@ -143,6 +143,7 @@ export class VenudetailPage implements OnInit {
       data.append('booking_hours', this.hours);
       data.append('max_persons', this.persons);
       data.append('vendor_id', this.vendorData.vendor_id);
+      data.append('vendorloc_id',localStorage.getItem('vendorloc_id'))
       var apiUrl = "http://18.134.186.121/apis/api/home/"
       // const loading = await this.loadingController.create({
       //   cssClass: 'my-custom-class',

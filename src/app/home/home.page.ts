@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   totaltime: any;
   timeToList: string;
   hours = '';
-  venueList = []
+  venueList = []; latFromBck; longFromBck;
   lat; long;
   recommandedArr = []; nolocFlag = false; durationArr = []; autolocation = true;
   constructor(public httpClient: HttpClient,
@@ -63,7 +63,15 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     this.subscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
+
     });
+    this.str3 = "";
+    this.address = '';
+    this.time = '';
+    this.date = '';
+    this.persons = '';
+    this.typeId = '';
+    this.hours = ''
     this.getLocation();
     this.getTypeList();
     this.durationArr = [
@@ -188,12 +196,14 @@ export class HomePage implements OnInit {
             // this.loading.dismiss()
             if (res.status == true) {
 
-              this.calculateCredits(res)
+              this.calculateCredits(res);
+
 
             } else {
               this.recommandedArr = [];
             }
-
+            localStorage.setItem('lat', res.lat)
+            localStorage.setItem('long', res.long)
           }, error => {
             // loading.dismiss()
           });
@@ -240,10 +250,13 @@ export class HomePage implements OnInit {
         this.httpClient.post(this.apiUrl + 'recommendedNearYou', data)
           .subscribe((res: any) => {
             if (res.status == true) {
-              this.calculateCredits(res)
+              this.calculateCredits(res);
+
             } else {
               this.recommandedArr = [];
             }
+            localStorage.setItem('lat', res.lat)
+            localStorage.setItem('long', res.long)
           }, error => {
           });
       })
@@ -401,15 +414,41 @@ export class HomePage implements OnInit {
                 // loading.dismiss()
                 if (res.status == true) {
                   this.calculateCredits(res)
+
                 } else {
                   this.recommandedArr = [];
                 }
+                localStorage.setItem('lat', res.lat)
+                localStorage.setItem('long', res.long)
               }, error => {
               });
           })
           .catch((error: any) => {
-            this.showToast(error);
-            this.recommandedArr = [];
+            this.lat = "";
+            this.long = "";
+            // localStorage.setItem('lat', this.lat);
+            // localStorage.setItem('long', this.long);
+            data.append('lat', this.lat)
+            data.append('long', this.long)
+            data.append('security_key', '8c410c9354e9c59740d8385a820b9adcfa1af5fc');
+            data.append('postcode', this.address);
+            data.append('type', this.typeId);
+            data.append('persons', this.persons);
+            data.append('sdate', this.str3);
+            data.append('stime', this.timeToList);
+            data.append('min_hours', this.hours);
+            this.httpClient.post(this.apiUrl + 'recommendedNearYou', data)
+              .subscribe((res: any) => {
+                // loading.dismiss()
+                if (res.status == true) {
+                  this.calculateCredits(res);
+                } else {
+                  this.recommandedArr = [];
+                }
+                localStorage.setItem('lat', res.lat)
+                localStorage.setItem('long', res.long)
+              }, error => {
+              });
           });
       })
     }
@@ -432,7 +471,7 @@ export class HomePage implements OnInit {
     this.getLoc()
   }
   async detail(item) {
-    localStorage.setItem('vendorloc_id',item.vendorloc_id)
+    localStorage.setItem('vendorloc_id', item.vendorloc_id)
     if (this.address.length <= 2) {
       this.showToast('Please enter Pin Code or Town')
     } else if (this.typeId.length <= 0) {
@@ -451,7 +490,7 @@ export class HomePage implements OnInit {
       let data = new FormData();
       data.append('security_key', '7ef9c8d85ccee7578ef8c792281914b9e9ab00a3');
       data.append('vendor_id', item.vendor_id)
-      data.append('vendorloc_id',item.vendorloc_id)
+      data.append('vendorloc_id', item.vendorloc_id)
       data.append('stime', this.timeToList);
       data.append('duration', this.hours);
       data.append('lat', this.lat);
@@ -487,7 +526,6 @@ export class HomePage implements OnInit {
   loginin() {
     this.navController.navigateRoot(`/loginmain`);
   }
-
   async showToast(msg) {
     let toast = await this.toast.create({
       message: msg,

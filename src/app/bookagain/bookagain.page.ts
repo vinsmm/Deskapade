@@ -30,7 +30,7 @@ export class BookagainPage implements OnInit {
   hours;
   persons = '';
   valildDurationFlag = false;
-  notes = ""; bookingtime; showApplyFlag = false; promocode=''; promoAppliedFlag = false; promoAmt;
+  notes = ""; bookingtime; showApplyFlag = false; promocode = ''; promoAppliedFlag = false; promoAmt;
   constructor(public formBuilder: FormBuilder,
     private navController: NavController,
     private router: Router,
@@ -223,7 +223,7 @@ export class BookagainPage implements OnInit {
                       'booking_date': this.str3, 'booking_time': this.time.substring(11, 16), 'booking_hours': this.hours,
                       'promoAmt': this.buyCredit, 'creditAmt': this.buyCredit, 'promoApplied': false, 'promoValid': false,
                       'total_persons': this.persons, 'total_amt': this.credits, 'addition_notes': localStorage.getItem('notes'),
-                      'credit_type': "debit"
+                      'vendorloc_id': localStorage.getItem('vendorloc_id'), 'credit_type': "debit"
                     }
                     // let navObj = { 'fromPage': 'bookagain', 'wallet_Amount': this.myCreditAmt, }
                     let navigationExtras: NavigationExtras = {
@@ -271,15 +271,28 @@ export class BookagainPage implements OnInit {
             }
             this.buyCredit = this.credits;
             if (this.myCreditAmt >= this.buyCredit) {
-              
+
               this.directPurchase(this.buyCredit)
             } else {
               let navObj = {
-                'fromPage': 'bookagain', 'amount': this.credits, 'type_id': this.vendorData.booking_type, 'wallet_Amount': this.myCreditAmt,
-                'user_id': localStorage.getItem('user_id'), 'vendor_id': this.vendorData.vendor_id,
-                'booking_date': this.str3, 'booking_time': this.time.substring(11, 16), 'booking_hours': this.hours,
-                'total_persons': this.persons, 'total_amt': this.credits, 'addition_notes': localStorage.getItem('notes'),
-                'credit_type': "debit", 'promoAmt': this.buyCredit, 'creditAmt': this.buyCredit, 'promoApplied': false, 'promoValid': false,
+                'fromPage': 'bookagain',
+                'amount': this.credits,
+                'type_id': this.vendorData.booking_type,
+                'wallet_Amount': this.myCreditAmt,
+                'user_id': localStorage.getItem('user_id'),
+                'vendor_id': this.vendorData.vendor_id,
+                'booking_date': this.str3,
+                'booking_time': this.time.substring(11, 16),
+                'booking_hours': this.hours,
+                'total_persons': this.persons,
+                'total_amt': this.credits,
+                'addition_notes': localStorage.getItem('notes'),
+                'credit_type': "debit",
+                'promoAmt': this.buyCredit,
+                'creditAmt': this.buyCredit,
+                'promoApplied': false,
+                'promoValid': false,
+                'vendorloc_id': localStorage.getItem('vendorloc_id')
               }
               let navigationExtras: NavigationExtras = {
                 queryParams: {
@@ -318,7 +331,7 @@ export class BookagainPage implements OnInit {
     data.append('credit_type', "debit")
     data.append('total_amt', credit)
     data.append('promo_code', this.promocode);
-    data.append('vendorloc_id',localStorage.getItem('vendorloc_id'))
+    data.append('vendorloc_id', localStorage.getItem('vendorloc_id'))
     var apiUrl = "http://18.134.186.121/apis/api/payments/"
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',

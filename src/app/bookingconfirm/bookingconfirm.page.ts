@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController, } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController, LoadingController, NavController, } from '@ionic/angular';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ReviewPage } from '../review/review.page'
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -14,6 +14,7 @@ export class BookingconfirmPage implements OnInit {
   constructor(private navController: NavController,
     public route: ActivatedRoute,
     public ss:SocialSharing,
+    public alert:AlertController,
     public loadingController:LoadingController,
     public modalController: ModalController) {
     this.route.queryParams.subscribe(params => {
@@ -35,8 +36,26 @@ export class BookingconfirmPage implements OnInit {
 
   }
 
-  credit() {
-    this.navController.navigateRoot(`/tabs/credit`);
+async  credit() {
+    
+    const confirm = await this.alert.create({
+      header: "Do you want to add more credits",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Buy Now',
+          handler: () => {
+            this.navController.navigateRoot(`/tabs/credit`);
+          }
+        }
+      ]
+    })
+    await confirm.present();
 
   }
 
@@ -66,7 +85,7 @@ export class BookingconfirmPage implements OnInit {
       duration:4000
     });
     await loading.present() 
-    this.ss.share("","","",encodeURI(this.bookingData.booking_pdf)).then(() => {
+    this.ss.share("Dear Customer, \nThank you for booking with us.\nPlease find your booking details with given link ","","\n",encodeURI(this.bookingData.booking_pdf)).then(() => {
       // Success!
       
     }).catch(() => {

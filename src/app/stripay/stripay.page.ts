@@ -45,13 +45,13 @@ export class StripayPage implements OnInit {
   }
 
   ngOnInit() {
-//TEST KEY 
-this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
-         //  this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
+//TEST KEY this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
+         //  
+         this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
   }
   formatCard(value: string){
       
-      const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
     const matches = v.match(/\d{4,16}/g);
     const match = (matches && matches[0]) || '';
     const parts = [];

@@ -103,8 +103,8 @@ export class UpcomingbookingPage implements OnInit {
   
   let data = new FormData();
   data.append('security_key', '827ea474a8d154921e2189cbd92a19555504cb77');
-  data.append('book_id', item.id);
-
+  data.append('book_id',item.b_id);
+  
   const loading = await this.loadingController.create({
     cssClass: 'my-custom-class',
     message: 'Please wait...',
@@ -113,7 +113,8 @@ export class UpcomingbookingPage implements OnInit {
   await loading.present().then(() => {
     this.httpClient.post(this.apiUrl + 'cancelBooking', data)
       .subscribe((res: any) => {
-        console.log(res);
+        console.log(res); 
+         loading.dismiss()
         if (res.status == true) {
           this.pastBookingArr = res.data;
           this.getbookingHistory()
@@ -121,7 +122,7 @@ export class UpcomingbookingPage implements OnInit {
            this.showToast(res.message)
         }
        
-        loading.dismiss()
+      
       }, error => {
         loading.dismiss()
       });
