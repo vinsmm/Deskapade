@@ -38,17 +38,17 @@ export class FlowcreditPage implements OnInit {
     this.loggedIn = localStorage.getItem('loggedIn');
     this.myCreditAmt = this.flowDetails.wallet_Amount;
     if (this.flowDetails.promoValid == true) {
-      this.buyCredit = this.flowDetails.promoAmt
+      this.buyCredit = Math.round(this.flowDetails.promoAmt);
     } else {
-      this.buyCredit = this.flowDetails.creditAmt
+      this.buyCredit = Math.round(this.flowDetails.creditAmt);
     }
     //parseInt(localStorage.getItem('creditAmt'))
     if (this.myCreditAmt >= this.buyCredit) {
-      var newbuyCredit = this.myCreditAmt - this.buyCredit;
+      var newbuyCredit = Math.round(this.myCreditAmt - this.buyCredit);
       this.buyCredit = 0;
       this.directPurchase(newbuyCredit)
     } else if (this.myCreditAmt < this.buyCredit) {
-      this.buyCredit = this.buyCredit - this.myCreditAmt;
+      this.buyCredit =Math.round(this.buyCredit - this.myCreditAmt);
 
     }
     // let data = new FormData();

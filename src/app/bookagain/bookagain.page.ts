@@ -398,13 +398,13 @@ export class BookagainPage implements OnInit {
   promoApplied(data) {
     this.buyCredit = this.credits
     if (data.is_disc_flat == '2') {
-      this.promoAmt = this.buyCredit - parseInt(data.df_amt);
+      this.promoAmt = Math.round(this.buyCredit - parseInt(data.df_amt));
       if (this.promoAmt < 0) {
         this.promoAmt = 0
       }
     } else if (data.is_disc_flat == '1') {
       var per_cal = (this.buyCredit * parseInt(data.df_amt)) / 100;
-      this.promoAmt = this.buyCredit - per_cal;
+      this.promoAmt = Math.round(this.buyCredit - per_cal);
       if (this.promoAmt < 0) {
         this.promoAmt = 0
       }

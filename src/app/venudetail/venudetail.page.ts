@@ -84,9 +84,9 @@ export class VenudetailPage implements OnInit {
     var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
     var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
     if (hoursParam <= personParam) {
-      this.credits = parseInt(this.vendorData.fix_price) * personParam
+      this.credits = Math.round(parseInt(this.vendorData.fix_price) * personParam)
     } else {
-      this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+      this.credits = Math.round(parseInt(this.vendorData.fix_price) * hoursParam)
     }
     localStorage.setItem('creditAmt', this.credits)
   }
@@ -328,13 +328,13 @@ export class VenudetailPage implements OnInit {
     console.log(this.buyCredit, ' ', parseInt(data.df_amt));
 
     if (data.is_disc_flat == '2') {
-      this.promoAmt = this.buyCredit - parseInt(data.df_amt);
+      this.promoAmt = Math.round(this.buyCredit - parseInt(data.df_amt));
       if (this.promoAmt < 0) {
         this.promoAmt = 0
       }
     } else if (data.is_disc_flat == '1') {
       var per_cal = (this.buyCredit * parseInt(data.df_amt)) / 100;
-      this.promoAmt = this.buyCredit - per_cal;
+      this.promoAmt =Math.round(this.buyCredit - per_cal);
       if (this.promoAmt < 0) {
         this.promoAmt = 0
       }

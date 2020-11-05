@@ -90,7 +90,6 @@ export class ListPage implements OnInit {
        
           <img src="./assets/images/icons/chevron-rightwhite.svg" style="margin-top:-1px;"/> </div>
           `
-
           var infoWindow = new google.maps.InfoWindow({
             content: contentString,
 
@@ -101,7 +100,6 @@ export class ListPage implements OnInit {
             infoWindow.close();
           });
           myMarker.addListener("click", () => {
-
             if (this.currentInfoWindow == undefined) {
               infoWindow.open(myMarker.getMap(), myMarker);
               this.currentInfoWindow = infoWindow;
@@ -115,13 +113,9 @@ export class ListPage implements OnInit {
             document.getElementById('clickableItem').addEventListener("click", () => {
               this.zone.run(() => {
                 this.getDetails(this.markers[i]);
-
               })
             })
           })
-
-
-
         })
       }
     }, 1000);
@@ -129,14 +123,14 @@ export class ListPage implements OnInit {
   showDetails(info) {
   }
   async getDetails(item) {
-    localStorage.setItem('vendorloc_id',item.vendorloc_id)
+    localStorage.setItem('vendorloc_id', item.vendorloc_id)
     var stime = localStorage.getItem('stime');
     var duration = localStorage.getItem('min_hours');
 
     let data = new FormData();
     data.append('security_key', '7ef9c8d85ccee7578ef8c792281914b9e9ab00a3');
     data.append('vendor_id', item.vendor_id);
-    data.append('vendorloc_id',item.vendorloc_id)
+    data.append('vendorloc_id', item.vendorloc_id)
     data.append('stime', stime);
     data.append('duration', duration);
     data.append('lat', this.lat);

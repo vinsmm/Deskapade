@@ -3,7 +3,7 @@ import { Stripe } from '@ionic-native/stripe/ngx';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NavController, ToastController, LoadingController } from '@ionic/angular';
+import { NavController, ToastController, LoadingController, AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-stripay',
   templateUrl: './stripay.page.html',
@@ -13,44 +13,52 @@ export class StripayPage implements OnInit {
   apiUrl = 'http://18.134.186.121/apis/api/payments/';
   segmentModel = "one";
   cardvals: FormGroup;
-  payinfo; stripetoken;
-  creditCardNumber:string;promocode='';
+  payinfo; stripetoken;stripeAmt;
+  creditCardNumber: string; promocode = '';
   constructor(public stripe: Stripe,
     public httpClient: HttpClient,
     private navController: NavController,
     private router: Router,
     private route: ActivatedRoute,
+    private alert: AlertController,
     public loadingController: LoadingController,
     public formBuilder: FormBuilder,
     public toast: ToastController,) {
     this.route.queryParams.subscribe(params => {
       this.payinfo = JSON.parse(params["paymentInfo"]);
       console.log(this.payinfo)
-      if(this.payinfo.promoApplied==false || this.payinfo.promoValid==false){
-        this.promocode=''
-      }else{
-        this.promocode=this.payinfo.promocode
+      if (this.payinfo.promoApplied == false || this.payinfo.promoValid == false) {
+        this.promocode = ''
+      } else {
+        this.promocode = this.payinfo.promocode
       }
 
       console.log(this.promocode);
-      
+      if(this.payinfo.fromPage == "bookagain"){
+        this.stripeAmt= this.payinfo.amount;
+      }else if(this.payinfo.fromPage=='mainCredit'){
+        this.stripeAmt= this.payinfo.buyCredit
+      }else{
+        this.stripeAmt= this.payinfo.amount;
+      }
+      console.log(this.payinfo.fromPage, this.stripeAmt)
     });
     this.cardvals = this.formBuilder.group({
-      crdname:['', [Validators.required, ]],
-      crdnum: ['', [Validators.required, ]],
+      crdname: ['', [Validators.required,]],
+      crdnum: ['', [Validators.required,]],
       expmnth: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       expyr: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      cvvnum: ['',Validators.compose([Validators.maxLength(3) ,Validators.pattern('^[0-9]{3,4}$'), Validators.required])],
+      cvvnum: ['', Validators.compose([Validators.maxLength(3), Validators.pattern('^[0-9]{3,4}$'), Validators.required])],
     })
   }
 
   ngOnInit() {
-//TEST KEY this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
-         //  
-         this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
+    //TEST KEY     
+    this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
+    // this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
   }
-  formatCard(value: string){
-      
+  formatCard(value: string) {
+
     const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
     const matches = v.match(/\d{4,16}/g);
     const match = (matches && matches[0]) || '';
@@ -65,11 +73,11 @@ export class StripayPage implements OnInit {
     }
   }
   async validateCard() {
-    let crdno=this.creditCardNumber.split('-')
+    let crdno = this.creditCardNumber.split('-')
 
     let card = {
       name: this.cardvals.value.crdname,
-      number: crdno[0]+crdno[1]+crdno[2]+crdno[3],//this.cardvals.value.crdnum,
+      number: crdno[0] + crdno[1] + crdno[2] + crdno[3],//this.cardvals.value.crdnum,
       expMonth: this.cardvals.value.expmnth,
       expYear: this.cardvals.value.expyr,
       cvc: this.cardvals.value.cvvnum
@@ -85,15 +93,38 @@ export class StripayPage implements OnInit {
       this.stripe.createCardToken(card)
         .then(token => {
           loading.dismiss()
-          this.sendPayDetails(token.id)
-          
-           
-       })
+          this.confirmpurchase(token.id)
+        })
         .catch(error => {
           this.showToast(error);
           loading.dismiss()
         });
     })
+  }
+  async confirmpurchase(token_id) {
+
+    const confirm = await this.alert.create({
+      header: "Proceed to Pay?",
+      message: this.stripeAmt+'credit/s = £'+this.stripeAmt+'.00',
+      buttons: [
+        {
+          text: 'Proceed',
+          handler: () => {
+            this.sendPayDetails(token_id)
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          
+          }
+        }
+      ]
+    })
+    await confirm.present();
+
   }
   async sendPayDetails(token) {
     if (this.payinfo.fromPage == "bookagain") {
@@ -112,9 +143,9 @@ export class StripayPage implements OnInit {
       data.append('addition_notes', this.payinfo.addition_notes)
       data.append('credit_type', this.payinfo.credit_type)
       data.append('wallet_amount', this.payinfo.wallet_Amount);
-      data.append('user_email',localStorage.getItem('user_email'));
-      data.append('promo_code',this.promocode)
-      data.append('vendorloc_id',localStorage.getItem('vendorloc_id'))
+      data.append('user_email', localStorage.getItem('user_email'));
+      data.append('promo_code', this.promocode)
+      data.append('vendorloc_id', localStorage.getItem('vendorloc_id'))
       const loading = await this.loadingController.create({
         cssClass: 'my-custom-class',
         message: 'Please wait...',
@@ -127,8 +158,8 @@ export class StripayPage implements OnInit {
             if (res.status == true) {
               this.navigateUser(res.data[0])
               this.showToast("Booking is Confirmed")
-            }else{
-               this.showToast(res.message)
+            } else {
+              this.showToast(res.message)
             }
             loading.dismiss()
           }, error => {
@@ -136,8 +167,8 @@ export class StripayPage implements OnInit {
             loading.dismiss()
           });
       })
-    } else if(this.payinfo.fromPage == "mainCredit"){
-      var apiUrl='http://18.134.186.121/apis/api/payments/'
+    } else if (this.payinfo.fromPage == "mainCredit") {
+      var apiUrl = 'http://18.134.186.121/apis/api/payments/'
       let data = new FormData();
       data.append('security_key', '8963727757d3ef494d0f8f67ece209a7b2dac5a4');
       data.append('credits', this.payinfo.buyCredit);
@@ -157,7 +188,7 @@ export class StripayPage implements OnInit {
             if (res.status == true) {
               this.navigateUser(res.data[0])
             }
-             this.showToast(res.message)
+            this.showToast(res.message)
             loading.dismiss()
           }, error => {
             loading.dismiss()
@@ -171,18 +202,18 @@ export class StripayPage implements OnInit {
       data.append('tokenId', token);
       data.append('type_id', localStorage.getItem('venue_type'))
       data.append('user_id', localStorage.getItem('user_id'))
-      data.append('vendor_id',localStorage.getItem('vendor_id'))
+      data.append('vendor_id', localStorage.getItem('vendor_id'))
       data.append('booking_date', localStorage.getItem('entDate'))
       data.append('booking_time', localStorage.getItem('stime'))
       data.append('booking_hours', localStorage.getItem('min_hours'))
-      data.append('total_persons',localStorage.getItem('persons'))
+      data.append('total_persons', localStorage.getItem('persons'))
       data.append('total_amt', this.payinfo.amount)
       data.append('addition_notes', localStorage.getItem('notes'))
       data.append('credit_type', 'debit');
       data.append('wallet_amount', this.payinfo.wallet_Amount);
-      data.append('user_email',localStorage.getItem('user_email'));
-      data.append('promo_code',this.promocode);
-      data.append('vendorloc_id',localStorage.getItem('vendorloc_id'))
+      data.append('user_email', localStorage.getItem('user_email'));
+      data.append('promo_code', this.promocode);
+      data.append('vendorloc_id', localStorage.getItem('vendorloc_id'))
       const loading = await this.loadingController.create({
         cssClass: 'my-custom-class',
         message: 'Please wait...',
@@ -195,10 +226,10 @@ export class StripayPage implements OnInit {
             if (res.status == true) {
               this.navigateUser(res.data[0])
               this.showToast("Booking is Confirmed")
-            }else{
-               this.showToast(res.message)
+            } else {
+              this.showToast(res.message)
             }
-           
+
             loading.dismiss()
           }, error => {
             this.showToast(error)
@@ -210,7 +241,7 @@ export class StripayPage implements OnInit {
   navigateUser(data) {
     if (this.payinfo.fromPage == "mainCredit") {
       this.navController.navigateRoot('/tabs/credit/activity')
-    } else if(this.payinfo.fromPage=="bookagain") {
+    } else if (this.payinfo.fromPage == "bookagain") {
       let navObj = data
       let navigationExtras: NavigationExtras = {
         queryParams: {
@@ -218,7 +249,7 @@ export class StripayPage implements OnInit {
         }
       }
       this.navController.navigateForward('/tabs/upcomingbooking/flowcredit/stripay/bookingconfirm', navigationExtras)
-    }else{
+    } else {
       let navObj = data
       let navigationExtras: NavigationExtras = {
         queryParams: {
