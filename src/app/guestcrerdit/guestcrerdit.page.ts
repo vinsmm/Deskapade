@@ -95,7 +95,7 @@ export class GuestcrerditPage implements OnInit {
     this.navController.navigateRoot(`/tabs/credit/activity`);
   }
   async buyCredits() {
-    let navObj = { 'fromPage': 'normal', 'user_id': this.userId, 'amount': this.buyCredit, 'promocode': this.flowDetails.promocode, 'email': this.email, 'promoApplied': this.flowDetails.promoApplied }
+    let navObj = { 'fromPage': 'normal', 'user_id': this.userId, 'amount': this.buyCredit, 'promocode': this.flowDetails.promocode, 'email': this.email, 'promoApplied': this.flowDetails.promoApplied,"wallet_Amount":'0' }
 
     let navigationExtras: NavigationExtras = {
       queryParams: {

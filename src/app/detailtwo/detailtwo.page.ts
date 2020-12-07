@@ -47,14 +47,33 @@ export class DetailtwoPage implements OnInit {
   calculateCredits() {
     var entered_hours = parseInt(localStorage.getItem("min_hours"));
     var entered_persons = parseInt(localStorage.getItem('persons'));
-    // var plainCredit=parseInt(this.vendorData.booking_hours)+parseInt(this.vendorData.booking_type)+parseInt(this.vendorData.max_persons);
-    var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
-    var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+   
+    // var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+    // var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
 
-    if (hoursParam <= personParam) {
-      this.credits = Math.round(parseInt(this.vendorData.fix_price) * personParam)
-    } else {
-      this.credits = Math.round(parseInt(this.vendorData.fix_price) * hoursParam)
+    // if (hoursParam <= personParam) {
+    //   this.credits = Math.round(parseInt(this.vendorData.fix_price) * personParam)
+    // } else {
+    //   this.credits = Math.round(parseInt(this.vendorData.fix_price) * hoursParam)
+    // }
+    if (localStorage.getItem('rate_criteria') == '1') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+     
+      if (hoursParam <= personParam) {
+        this.credits = parseInt(this.vendorData.fix_price) * personParam
+      } else {
+        this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+      }
+       
+    } else if (localStorage.getItem('rate_criteria') == '2') {
+      this.credits = parseInt(this.vendorData.fix_price);
+    } else if (localStorage.getItem('rate_criteria') == '3') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+      console.log(hoursParam, personParam);
+      this.credits= parseInt(this.vendorData.fix_price) * (hoursParam * personParam)
+      
     }
     localStorage.setItem('creditAmt', this.credits)
   }
@@ -119,7 +138,8 @@ export class DetailtwoPage implements OnInit {
                     let navObj = { 'fromPage': 'normal', 'wallet_Amount': this.myCreditAmt, 'promoAmt': this.promoAmt, 'creditAmt': this.buyCredit, 'promoValid': true, 'promocode': this.promocode }
                     let navigationExtras: NavigationExtras = {
                       queryParams: {
-                        pageData: JSON.stringify(navObj)
+                        pageData: JSON.stringify(navObj),
+                        replaceUrl: true 
                       }
                     }
                     this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowcredit`, navigationExtras);
@@ -149,7 +169,8 @@ export class DetailtwoPage implements OnInit {
                     let navObj = { 'fromPage': 'normal', 'wallet_Amount': this.myCreditAmt, 'promocode': this.promocode, 'promoAmt': this.buyCredit, 'creditAmt': this.buyCredit, 'promoValid': false }
                     let navigationExtras: NavigationExtras = {
                       queryParams: {
-                        pageData: JSON.stringify(navObj)
+                        pageData: JSON.stringify(navObj),
+                        replaceUrl: true 
                       }
                     }
                     this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowcredit`, navigationExtras);
@@ -167,7 +188,8 @@ export class DetailtwoPage implements OnInit {
       let navObj = { 'fromPage': 'normal', 'wallet_Amount': this.myCreditAmt, 'promoAmt': this.promoAmt, 'creditAmt': this.buyCredit, 'promoApplied': this.promoAppliedFlag, 'promocode': this.promocode }
       let navigationExtras: NavigationExtras = {
         queryParams: {
-          pageData: JSON.stringify(navObj)
+          pageData: JSON.stringify(navObj),
+          replaceUrl: true ,
         }
       }
       this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowlogin`, navigationExtras);
@@ -202,7 +224,8 @@ export class DetailtwoPage implements OnInit {
               let navObj = { 'fromPage': 'normal', 'wallet_Amount': this.myCreditAmt, 'promoAmt': this.buyCredit, 'creditAmt': this.buyCredit, 'promoValid': false, 'promocode': this.promocode }
               let navigationExtras: NavigationExtras = {
                 queryParams: {
-                  pageData: JSON.stringify(navObj)
+                  pageData: JSON.stringify(navObj),
+                  replaceUrl: true 
                 }
               }
               this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowcredit`, navigationExtras);
@@ -216,7 +239,8 @@ export class DetailtwoPage implements OnInit {
       let navObj = { 'fromPage': 'normal', 'wallet_Amount': this.myCreditAmt, 'promoAmt': this.promoAmt, 'creditAmt': this.credits, 'promoApplied': this.promoAppliedFlag, 'promocode': this.promocode }
       let navigationExtras: NavigationExtras = {
         queryParams: {
-          pageData: JSON.stringify(navObj)
+          pageData: JSON.stringify(navObj),
+          replaceUrl: true 
         }
       }
       this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowlogin`, navigationExtras);
@@ -254,7 +278,8 @@ export class DetailtwoPage implements OnInit {
           let navObj = res.data[0]
           let navigationExtras: NavigationExtras = {
             queryParams: {
-              bookingData: JSON.stringify(navObj)
+              bookingData: JSON.stringify(navObj),
+              replaceUrl: true 
             }
           }
           this.navController.navigateForward('/tabs/home/list/amenity/detailtwo/flowlogin/bookingconfirm', navigationExtras)

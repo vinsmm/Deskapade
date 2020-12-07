@@ -26,15 +26,15 @@
 
         </div>
         <div class="newinputline">
-          <ion-label position="stacked" color="primary" stacked>Expiration Month/Year</ion-label>
-          <ion-input class="newinput" maxlength=2 type="tel" placeholder="MM" formControlName="expmnth"></ion-input>
+          <ion-label position="stacked" color="primary" stacked>Expiration MM/YYYY</ion-label>
+          <ion-input class="newinput1" maxlength=2 type="tel" placeholder="MM" formControlName="expmnth"></ion-input>
           
-          <ion-input class="newinput" maxlength=4 type="tel" placeholder="YYYY" formControlName="expyr"></ion-input>
+          <ion-input class="newinput" maxlength=4 type="tel" placeholder="YYYY" formControlName="expyr" ></ion-input>
         </div>
     
         <div class="newinputline">
           <ion-label position="stacked">CVV</ion-label>
-          <ion-input type="password" inputmode='numeric'  maxlength="3" placeholder="Enter your CVV" formControlName="cvvnum"></ion-input>
+          <ion-input class="newinput2" type="password" inputmode='numeric'  maxlength="3" placeholder="CVV" formControlName="cvvnum"></ion-input>
         </div>
         <ion-button class="newsearch" (click)="validateCard()" shape="round" [disabled]="!cardvals.valid" expand="full">
           Proceed To Pay<img src="assets/images/icons/arrow_white.svg" /></ion-button>

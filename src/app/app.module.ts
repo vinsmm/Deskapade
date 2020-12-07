@@ -16,7 +16,7 @@ import { NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import { Stripe } from '@ionic-native/stripe/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 // import { IonicRatingModule } from "ionic-rating";
-// import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,7 +29,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     NativeGeocoder,
     Stripe,
     SocialSharing,
-    // OneSignal,
+    OneSignal,
     OpenNativeSettings,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

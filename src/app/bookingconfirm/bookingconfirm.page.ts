@@ -23,11 +23,14 @@ export class BookingconfirmPage implements OnInit {
   }
 
   ngOnInit() {
-    this.presentModal()
+    setTimeout(()=>{
+      this.presentModal()
+    },2000)
   }
 
   home() {
-    this.navController.navigateRoot(`/tabs/home`);
+    this.navController.pop()
+    this.navController.navigateRoot(`/tabs/home`,{replaceUrl: true} );
 
   }
 
@@ -85,10 +88,11 @@ async  credit() {
       duration:4000
     });
     await loading.present() 
-    this.ss.share("Dear Customer, \nThank you for booking with us.\nPlease find your booking details with given link ","","\n",encodeURI(this.bookingData.booking_pdf)).then(() => {
+    this.ss.share("Dear Customer, \nThank you for booking with us.\nPlease find your booking details with given link\n","","", this.bookingData.booking_pdf).then(() => {
       // Success!
       
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err)
       // Error!
     });
   }

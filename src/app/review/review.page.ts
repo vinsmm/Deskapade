@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router'; 
 import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,7 @@ export class ReviewPage implements OnInit {
   
   constructor(private navController: NavController,
      public httpClient: HttpClient,
+     public alertController:AlertController,
      private loadingController: LoadingController,
      public modalCtrl: ModalController) { }
 
@@ -58,9 +59,7 @@ export class ReviewPage implements OnInit {
         .subscribe((res: any) => {
           console.log(res);
           if(res.status==true){
-            this.modalCtrl.dismiss({
-              'dismissed': true,
-            });
+           this.showThanks()
           }
           // let navObj = res.data[0]
           // let navigationExtras: NavigationExtras = {
@@ -75,5 +74,32 @@ export class ReviewPage implements OnInit {
         });
 
     })
+  }
+ async showThanks(){
+   
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Thank You for',
+      subHeader: 'your feedback',
+      // message: 'This is an alert message.',
+      // buttons: [
+      //     {
+      //     text: 'Ok',
+      //     handler: () => {
+      //       this.modalCtrl.dismiss({
+      //         'dismissed': true,
+      //       });
+      //     }
+      //   }
+      // ]
+    });
+
+    await alert.present();
+    setTimeout(()=>{
+      alert.dismiss();
+      this.modalCtrl.dismiss({
+                'dismissed': true,
+              });
+  }, 2000);
   }
 }

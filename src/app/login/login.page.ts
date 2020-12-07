@@ -19,27 +19,27 @@ export class LoginPage implements OnInit {
     private navController: NavController,
     private router: Router,
     public toast: ToastController,
-    public event:MyeventService,
+    public event: MyeventService,
     public loadingController: LoadingController) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       password: ['', [Validators.required, Validators.minLength(8)]],
-    }); 
-     
+    });
+
   }
 
   ngOnInit() {
-    var loggedtype=localStorage.getItem('logintype');
-    if(loggedtype=='forced'){
-      this.removeGuest=true
-    }else{
-      this.removeGuest=false;
+    var loggedtype = localStorage.getItem('logintype');
+    if (loggedtype == 'forced') {
+      this.removeGuest = true
+    } else {
+      this.removeGuest = false;
     }
-    
+
   }
-  ionViewDidEnter(){
-   console.log( this.removeGuest);
-   
+  ionViewDidEnter() {
+    console.log(this.removeGuest);
+
   }
 
 
@@ -60,39 +60,50 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
+    console.log(this.loginForm.value.email.length, this.loginForm.value.password.length)
+    if (this.loginForm.value.email.length == 0) {
+      this.showToast('Please enter email')
+    } else if (this.loginForm.value.password.length==0) {
+      this.showToast('Please enter password')
+    } else {
 
-    let data = new FormData();
-    data.append('security_key', '179d89369fcd37d62ed9a5bc60c2371d4f82acea');
-    data.append('username', this.loginForm.value.email);
-    data.append('password', this.loginForm.value.password);
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
 
-    });
-    await loading.present().then(() => {
-      this.httpClient.post(this.apiUrl + 'userLogin', data)
-        .subscribe((res: any) => {
-          console.log(res);
-          if(res.status==true){
-            localStorage.setItem('loggedIn','true');
-            localStorage.setItem('user_id',res.data.user_id);
-            localStorage.setItem('user_email',res.data.email);
-            localStorage.setItem('user_mobile',res.data.mobile)
-            this.navController.navigateRoot(`/tabs`);
-          }
-          if(res.message=="User signed-in"){
-            this.showToast('User Logged In')
-          }else{
-            this.showToast(res.message)
-          }
+      let data = new FormData();
+      data.append('security_key', '179d89369fcd37d62ed9a5bc60c2371d4f82acea');
+      data.append('username', this.loginForm.value.email);
+      data.append('password', this.loginForm.value.password);
+      const loading = await this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'Please wait...',
+
+      });
+      await loading.present().then(() => {
+        this.httpClient.post(this.apiUrl + 'userLogin', data)
+          .subscribe((res: any) => {
+            console.log(res);
             loading.dismiss()
-        }, error => {
-          loading.dismiss()
-        });
+            if (res.status == true) {
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('user_id', res.data.user_id);
+              localStorage.setItem('user_email', res.data.email);
+              localStorage.setItem('user_mobile', res.data.mobile)
+              this.navController.navigateRoot(`/tabs`);
+              if (res.message == "User signed-in") {
+                this.showToast('User Logged In')
+              } else {
+                this.showToast(res.message)
+              }
+            } else {
+              this.showToast(res.message)
+            }
 
-    })
 
+          }, error => {
+            loading.dismiss()
+          });
+
+      })
+    }
 
   }
 

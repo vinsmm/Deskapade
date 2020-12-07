@@ -25,7 +25,7 @@ export class GuestloginPage implements OnInit {
       firstname: ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       lastname: ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-      number: ['', [Validators.required, Validators.minLength(10)]],
+      number: [''],
     })
 
 
@@ -101,8 +101,10 @@ export class GuestloginPage implements OnInit {
               // this.navController.navigateForward(['/tabs/home/list/amenity/detailtwo/flowlogin/verifycode'], navigationExtras);
               this.navController.navigateForward(`/tabs/home/list/amenity/detailtwo/flowlogin/guestcrerdit`, navigationExtras);
             }
+          }else{
+              this.showToast(res.message)
           }
-          // this.showToast(res.message)
+          
 
         }, error => {
           loading.dismiss()

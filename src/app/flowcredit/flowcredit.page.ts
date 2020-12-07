@@ -51,6 +51,7 @@ export class FlowcreditPage implements OnInit {
       this.buyCredit =Math.round(this.buyCredit - this.myCreditAmt);
 
     }
+    this.minCredit=this.buyCredit
     // let data = new FormData();
     // data.append('security_key', '61ea8cb8b2d57930b805104c8a31be6b35cfa4f2');
     // data.append('user_id', localStorage.getItem('user_id'));
@@ -125,6 +126,7 @@ export class FlowcreditPage implements OnInit {
 
   }
   decrement() {
+    console.log(this.buyCredit,"    ", this.minCredit)
     if (this.buyCredit > this.minCredit) {
       this.buyCredit--;
     } else {

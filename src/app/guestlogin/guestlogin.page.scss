@@ -90,7 +90,12 @@ width:100%;
 height:auto;
 border-bottom:1px solid #000;
 }
-
+.error {
+    font-size: 0.8em;
+    color: red !important;
+ 	margin-bottom: 15px !important;
+	margin-top:6px !important;
+}
 .loginmain h2
 {
 width:100%;

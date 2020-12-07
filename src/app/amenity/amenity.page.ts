@@ -29,16 +29,33 @@ export class AmenityPage implements OnInit {
   calculateCredits(){
     var entered_hours=parseInt(localStorage.getItem("min_hours"));
     var entered_persons=parseInt(localStorage.getItem('persons'));
-    // var plainCredit=parseInt(this.vendorData.booking_hours)+parseInt(this.vendorData.booking_type)+parseInt(this.vendorData.max_persons);
-    
-    var hoursParam=Math.ceil(entered_hours/parseInt(this.vendorData.booking_hours));
-    var personParam=Math.ceil(entered_persons/parseInt(this.vendorData.max_persons))
-    
-    if(hoursParam<=personParam){
-      this.credits=parseInt(this.vendorData.fix_price)*personParam
-    }else{
-      this.credits=parseInt(this.vendorData.fix_price)*hoursParam
+    if (localStorage.getItem('rate_criteria') == '1') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+     
+      if (hoursParam <= personParam) {
+        this.credits = parseInt(this.vendorData.fix_price) * personParam
+      } else {
+        this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+      }
+       
+    } else if (localStorage.getItem('rate_criteria') == '2') {
+      this.credits = parseInt(this.vendorData.fix_price);
+    } else if (localStorage.getItem('rate_criteria') == '3') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+      console.log(hoursParam, personParam);
+      this.credits= parseInt(this.vendorData.fix_price) * (hoursParam * personParam)
+      
     }
+    // var hoursParam=Math.ceil(entered_hours/parseInt(this.vendorData.booking_hours));
+    // var personParam=Math.ceil(entered_persons/parseInt(this.vendorData.max_persons))
+    
+    // if(hoursParam<=personParam){
+    //   this.credits=parseInt(this.vendorData.fix_price)*personParam
+    // }else{
+    //   this.credits=parseInt(this.vendorData.fix_price)*hoursParam
+    // }
    }
   toggleGroup(group) {
     if (this.isGroupShown(group)) {

@@ -88,12 +88,12 @@
           Please enter a valid email.</p>
 
           <ion-item>
-            <ion-label>Contact no.</ion-label>
+            <ion-label>Contact no.<span>(Optional)</span></ion-label>
             <ion-input inputmode="numeric" type="tel"  type="number" formControlName="number" slot="end"></ion-input>
           </ion-item>
-          <p class="error"
+          <!-- <p class="error"
           *ngIf="!registerForm.controls.number.valid  && (registerForm.controls.number.dirty ||  registerForm.get('number').touched)">
-          Please enter your contact no.</p>
+          Please enter your contact no.</p> -->
           <ion-item class="newselect">
             <ion-label>Age <span>(Optional)</span></ion-label>
             <ion-select placeholder="Age (Optional) " formControlName="age">

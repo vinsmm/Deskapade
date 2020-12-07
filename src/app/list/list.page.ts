@@ -51,7 +51,7 @@ export class ListPage implements OnInit {
     const location = new google.maps.LatLng(this.lat, this.long);
     const options = {
       center: location,
-      zoom: 15,
+      zoom: 14,
       animation: 'DROP',
       draggable: true,
       markers: true,
@@ -61,32 +61,61 @@ export class ListPage implements OnInit {
 
     setTimeout(() => {
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-      new google.maps.Marker({
+      let mainmarker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
         position: this.map.getCenter(),
-        // icon: ("http://maps.google.com/mapfiles/ms/icons/green-dot.png")
+        fullscreenControl: false
+        //  icon: ("./assets/images/icons/location_filled.svg")
       });
       //  mainmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
       // this.markers.forEach(element => {
       //   this.createMarker(element.position);
-      // });
-
+      // });\
+      let myMark = `<div  style='float:left;position: relative;
+      text-align: center;
+      margin-top: 0;
+      width:200px;
+      height:100px;
+      line-height:100px;
+      border-radius: 10px;background:#000; z-index:9999;'>
+      <ion-label style="font-size:15pt;color:white;font-weight:bold;margin-top:20pt; color:#fff;" > You are  here</ion-label>
+      </div>
+      `
+      let mainInfoWindow = new google.maps.InfoWindow({
+        content: myMark,
+        
+      })
+      mainmarker.addListener("click", () => {
+        mainInfoWindow.open(mainmarker.getMap(), mainmarker);
+      })
       for (let i = 0; i < this.markers.length; i++) {
         this.zone.run(() => {
           var LatLng = new google.maps.LatLng(this.markers[i].vendor_lat, this.markers[i].vendor_long);
-          const myMarker = new google.maps.Marker({ position: LatLng, title: this.markers[i].vendor_business, map: this.map })
-          const contentString = `<div id='clickableItem' style="max-width:400pt" >
+          const myMarker = new google.maps.Marker({ position: LatLng, title: this.markers[i].vendor_business, map: this.map, icon: '../assets/images/icons/location-marker.png' })
+          
+          const contentString = `<div id='clickableItem' style="max-width:400pt; z-index: 9999;" >
           <div  style='float:left;position: relative;
           text-align: center;
           margin-top: 0;
           border-radius: 10px;'>
+
           <img style='height:100pt;width:100%;vertical-align:bottom;border-radius:10pt' src='` + this.markers[i].photo + `'>
-          </div>
+          <div style="position: absolute;
+          top: 0;
+ 
+            background: rgba(0, 0, 0, 0.5); 
+            color: #f1f1f1;
+            width: 100%;
+            transition: .5s ease;
+          height:100%;
+            padding: 0;border-radius:8px;left:0;right:0;
+            text-align: center;"></div>
+                    </div>
           <div style='width: 100%;height: auto;position: absolute;padding: 0px 10px 0 10px;
           bottom: 16px;color:white; z-index:99;'><div style="float:left; width:60%; line-height:1.5; font-size:16px; font-weight: 600">` + this.markers[i].vendor_business + `<div style="font-weight:400; font-size:14px;"> ` + this.markers[i].miles + ` miles
           </div>   </div>
-          <div style="float:right; margin-top:0; position:absolute; right:0; bottom:0;"> <p style="float:left; margin:0;">` + this.markers[i].caltulateRate + ` <img style ="vertical-align: sub; margin-left:2px; width:18px; margin-right:9px;  font-size:14px; font-weight:400;" src="./assets/images/icons/credits_white.svg" /></p> 
+          <div style="float:right; margin-top:0; position:absolute; right:0; bottom:0;"> <p style="float:left; margin:0; font-weight:500;">` + this.markers[i].caltulateRate + ` <img style ="vertical-align: sub; margin-left:2px; width:18px; margin-right:9px;  font-size:14px; font-weight:400;" src="./assets/images/icons/credits_white.svg" /></p> 
        
           <img src="./assets/images/icons/chevron-rightwhite.svg" style="margin-top:-1px;"/> </div>
           `
@@ -123,7 +152,8 @@ export class ListPage implements OnInit {
   showDetails(info) {
   }
   async getDetails(item) {
-    localStorage.setItem('vendorloc_id', item.vendorloc_id)
+    localStorage.setItem('vendorloc_id', item.vendorloc_id);
+    localStorage.setItem('rate_criteria',item.rate_criteria)
     var stime = localStorage.getItem('stime');
     var duration = localStorage.getItem('min_hours');
 

@@ -33,7 +33,7 @@
       <ion-list class="newcard">
         <div *ngFor="let item of upcomingBookingArr">
           
-          <ion-item-sliding *ngIf="item.status=='1'">
+          <ion-item-sliding *ngIf="item.status=='1' && item.checkVal=='1'">
             <ion-item>
 
               <ion-card>
@@ -59,7 +59,7 @@
               </ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-          <ion-item-sliding disabled="true" *ngIf="item.status=='3'">
+          <ion-item-sliding disabled="true" *ngIf="item.status=='3'  && item.checkVal=='1'">
             <ion-item>
               <ion-card>
                 <ion-card-content>
@@ -122,129 +122,3 @@
     </div>
   </div>
 </ion-content>
-<!-- <ion-item-sliding>
-          <ion-item>
-            <ion-card>
-              <ion-card-content>
-                <div class="newside">
-                  <p>Sep</p>
-                  <span>
-                    12
-                  </span>
-                </div>
-                <div class="newcontent">
-                  <h2>Opal House offices</h2>
-                  <h5>01:30PM - 02:30PM</h5>
-                  <p>Opal House, 46 Opal Street, Manchester, M23 JY</p>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
-  
-          <ion-item-options>
-            <ion-item-option expandable>
-              <img slot="top" src="assets/images/icons/crosswhite.svg" />
-              Cancel
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-card>
-              <ion-card-content>
-                <div class="newside">
-                  <p>Sep</p>
-                  <span>
-                    12
-                  </span>
-                </div>
-                <div class="newcontent">
-                  <h2>Terrence Square Lounge</h2>
-                  <h5>04.00PM -05.00PM</h5>
-                  <p>Opal House, 46 Opal Street, Manchester, M23 JY</p>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
-  
-          <ion-item-options>
-            <ion-item-option expandable>
-              <img slot="top" src="assets/images/icons/crosswhite.svg" />
-              Cancel
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding> -->
-
-<!-- Cancelled design  -->
-<!-- <ion-item-sliding disabled="true">
-          <ion-item>
-            <ion-card>
-              <ion-card-content>
-                <div class="newside">
-                  <p>Sep
-                  </p>
-                  <span>
-                    25
-                  </span>
-                </div>
-                <div class="newcontent">
-                  <h2>Opal House offices</h2>
-                  <h5>04:30PM - 06:30PM</h5>
-                  <p>Terrence Square Lounge,78 Terrence Square, Manchester, M5 2FP</p>
-                </div>
-              </ion-card-content>
-              <div class="newoverlay">
-                <p>Cancelled</p>
-              </div>
-            </ion-card>
-  
-          </ion-item>
-          <ion-item-options>
-            <ion-item-option>
-              <img slot="top" src="assets/images/icons/crosswhite.svg" />
-              Cancel
-            </ion-item-option>
-          </ion-item-options>
-  
-        </ion-item-sliding> -->
-
-<!-- <ion-item-sliding>
-          <ion-item>
-            <ion-card>
-              <ion-card-content>
-                <div class="newside">
-                  <p>Jul
-                  </p>
-                  <span>12</span>
-                </div>
-                <div class="newcontent">
-                  <h2>Opal House offices</h2>
-                  <h5>01:30PM - 02:30PM</h5>
-                  <p>Opal House, 46 Opal Street, Manchester, M23 JY</p>
-                </div>
-              </ion-card-content>
-              <ion-button expand="full" shape="round" class="newbtn">Book again</ion-button>
-            </ion-card>
-          </ion-item>
-  
-        </ion-item-sliding>
-  
-        <ion-item-sliding>
-          <ion-item>
-            <ion-card>
-              <ion-card-content>
-                <div class="newside">
-                  <p>Jul</p>
-                  <span>12</span>
-                </div>
-                <div class="newcontent">
-                  <h2>Terrence Square Lounge</h2>
-                  <h5>04.00PM -05.00PM</h5>
-                  <p>Terrence Square Lounge,78 Terrence Square, Manchester, M5 2FP</p>
-                </div>
-              </ion-card-content>
-              <ion-button expand="full" shape="round" class="newbtn">Book again</ion-button>
-            </ion-card>
-          </ion-item>
-  
-        </ion-item-sliding> -->

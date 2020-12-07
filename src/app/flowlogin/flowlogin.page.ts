@@ -35,8 +35,14 @@ export class FlowloginPage implements OnInit {
 
   }
   ngOnInit() {
+    console.log(this.flowDetails)
     var loggedtype = localStorage.getItem('logintype');
-    this.guestCredit = localStorage.getItem('creditAmt')
+    if(this.flowDetails.promoApplied==true){
+      this.guestCredit=this.flowDetails.promoAmt;
+    }else{
+       this.guestCredit = localStorage.getItem('creditAmt')
+    }
+   
     if (loggedtype == 'forced') {
       this.removeGuest = true
     } else {
@@ -75,48 +81,53 @@ export class FlowloginPage implements OnInit {
   }
 
   async login() {
+    if (this.loginForm.value.email.length == 0) {
+      this.showToast('Please enter email')
+    } else if (this.loginForm.value.password.length == 0) {
+      this.showToast('Please enter password')
+    } else {
 
-    let data = new FormData();
-    data.append('security_key', '179d89369fcd37d62ed9a5bc60c2371d4f82acea');
-    data.append('username', this.loginForm.value.email);
-    data.append('password', this.loginForm.value.password);
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
+      let data = new FormData();
+      data.append('security_key', '179d89369fcd37d62ed9a5bc60c2371d4f82acea');
+      data.append('username', this.loginForm.value.email);
+      data.append('password', this.loginForm.value.password);
+      const loading = await this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'Please wait...',
 
-    });
-    await loading.present().then(() => {
-      this.httpClient.post(this.apiUrl + 'userLogin', data)
-        .subscribe((res: any) => {
-          loading.dismiss()
-          if (res.status == true) {
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('user_id', res.data.user_id);
-            localStorage.setItem('user_email', res.data.email);
-            localStorage.setItem('user_mobile', res.data.mobile)
-            this.userId = res.data.user_id
-            if (this.flowDetails.promoApplied == true) {
-              this.checkPromoValid()
-            } else {
-              this.checkCredit()
+      });
+      await loading.present().then(() => {
+        this.httpClient.post(this.apiUrl + 'userLogin', data)
+          .subscribe((res: any) => {
+            loading.dismiss()
+            if (res.status == true) {
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('user_id', res.data.user_id);
+              localStorage.setItem('user_email', res.data.email);
+              localStorage.setItem('user_mobile', res.data.mobile)
+              this.userId = res.data.user_id
+              if (this.flowDetails.promoApplied == true) {
+                this.checkPromoValid()
+              } else {
+                this.checkCredit()
+              }
+              // 
+
             }
-            // 
-
-          }
-          if (res.message == "User signed-in") {
-            this.showToast('User Logged In')
-          } else {
-            this.showToast(res.message)
-          }
+            if (res.message == "User signed-in") {
+              this.showToast('User Logged In')
+            } else {
+              this.showToast(res.message)
+            }
 
 
-        }, error => {
-          loading.dismiss()
-        });
+          }, error => {
+            loading.dismiss()
+          });
 
-    })
+      })
 
-
+    }
   }
 
   register() {
@@ -149,7 +160,7 @@ export class FlowloginPage implements OnInit {
           }
           this.buyCredit = parseInt(this.flowDetails.creditAmt)
           if (this.myCreditAmt >= this.buyCredit) {
-            
+
             this.directPurchase(this.buyCredit)
           } else {
             let navObj = { 'fromPage': 'flowlogin', 'wallet_Amount': this.myCreditAmt, 'promoAmt': this.buyCredit, 'creditAmt': this.buyCredit, 'promoValid': false }
@@ -186,7 +197,7 @@ export class FlowloginPage implements OnInit {
     data.append('user_email', localStorage.getItem('user_email'))
     data.append('promo_code', this.flowDetails.promocode);
     data.append('addition_notes', localStorage.getItem('notes'))
-    data.append('vendorloc_id',localStorage.getItem('vendorloc_id'))
+    data.append('vendorloc_id', localStorage.getItem('vendorloc_id'))
     data.append('credit_type', "debit")
     var apiUrl = "http://18.134.186.121/apis/api/payments/"
     const loading = await this.loadingController.create({

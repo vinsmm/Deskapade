@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ForgotpasswordPage implements OnInit {
   apiUrl = 'http://18.134.186.121/apis/api/users/';
-  user_email;
+  user_email='';
   constructor(private navController: NavController, private router: Router,
     public loadingController: LoadingController,
     private route: ActivatedRoute,
@@ -21,6 +21,9 @@ export class ForgotpasswordPage implements OnInit {
   ngOnInit() {
   }
   async forgotPass() {
+   if(this.user_email.length==0){
+     this.showToast("Please enter email")
+   }else{
     let data = new FormData();
     data.append('security_key', 'bc15d63b154e8327e9bc5dfba2c12c743a461fe8');
     data.append('email', this.user_email);
@@ -41,6 +44,7 @@ export class ForgotpasswordPage implements OnInit {
         }, error => {
         });
     })
+   }
 
   }
   async showToast(msg) {

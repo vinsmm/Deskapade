@@ -41,9 +41,9 @@
           <ion-item shape="round">
             <ion-input placeholder="Contact number" type="number" formControlName="number"></ion-input>
           </ion-item>
-          <p class="error"
+          <!-- <p class="error"
             *ngIf="!registerForm.controls.number.valid  && (registerForm.controls.number.dirty ||  registerForm.get('number').touched)">
-            Please enter your contact no.</p>
+            Please enter your contact no.</p> -->
           <ion-button class="newsearch" shape="round" expand="full" (click)="submitForm()" [disabled]="!registerForm.valid">Continue as Guest<img
               src="assets/images/icons/arrow_white.svg" /></ion-button>
 

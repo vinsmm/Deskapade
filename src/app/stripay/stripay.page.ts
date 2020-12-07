@@ -13,7 +13,7 @@ export class StripayPage implements OnInit {
   apiUrl = 'http://18.134.186.121/apis/api/payments/';
   segmentModel = "one";
   cardvals: FormGroup;
-  payinfo; stripetoken;stripeAmt;
+  payinfo; stripetoken; stripeAmt;
   creditCardNumber: string; promocode = '';
   constructor(public stripe: Stripe,
     public httpClient: HttpClient,
@@ -34,12 +34,12 @@ export class StripayPage implements OnInit {
       }
 
       console.log(this.promocode);
-      if(this.payinfo.fromPage == "bookagain"){
-        this.stripeAmt= this.payinfo.amount;
-      }else if(this.payinfo.fromPage=='mainCredit'){
-        this.stripeAmt= this.payinfo.buyCredit
-      }else{
-        this.stripeAmt= this.payinfo.amount;
+      if (this.payinfo.fromPage == "bookagain") {
+        this.stripeAmt = this.payinfo.amount;
+      } else if (this.payinfo.fromPage == 'mainCredit') {
+        this.stripeAmt = this.payinfo.buyCredit
+      } else {
+        this.stripeAmt = this.payinfo.amount;
       }
       console.log(this.payinfo.fromPage, this.stripeAmt)
     });
@@ -53,9 +53,9 @@ export class StripayPage implements OnInit {
   }
 
   ngOnInit() {
-    //TEST KEY     this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
-    //
-    this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
+    //TEST KEY   this.stripe.setPublishableKey('pk_test_51HNIlVB2ICFaY755wNueNxR9OyPRECqbvJUo4TPkN5TtrSWkres2PvJUHD0b6WCT0vFSvoVvd8aJfWnLiwtKJ4HD00tk3etALQ');
+    //LIVE KEY   
+     this.stripe.setPublishableKey('pk_live_51HNIlVB2ICFaY755sa11hA4guTIDyBlQ1JfKx9n2TYJwYV6xkO1VA2M36BrQWVroc4Lq3U09JKnZr6dXN8hYqIVk00ey7erPMg');
   }
   formatCard(value: string) {
 
@@ -72,40 +72,53 @@ export class StripayPage implements OnInit {
       this.creditCardNumber = value;
     }
   }
+  
   async validateCard() {
-    let crdno = this.creditCardNumber.split('-')
+    // console.log(this.cardvals.value)
+    // if (this.cardvals.value.crdnum.length < 19) {
+    //   this.showToast('Please enter valid 16 digit card number')
+    // } else if (this.cardvals.value.expmnth.length < 2) {
+    //   this.showToast('Enter month in MM format')
+    // }
+    // else if (this.cardvals.value.expyr.length < 4) {
+    //   this.showToast('Enter year in YYYY format')
+    // }
+    // else if (this.cardvals.value.cvvnum < 3) {
+    //   this.showToast('Please enter 3 digit CVV')
+    // }
+    // else {
+      let crdno = this.creditCardNumber.split('-')
+      let card = {
+        name: this.cardvals.value.crdname,
+        number: crdno[0] + crdno[1] + crdno[2] + crdno[3],//this.cardvals.value.crdnum,
+        expMonth: this.cardvals.value.expmnth,
+        expYear: this.cardvals.value.expyr,
+        cvc: this.cardvals.value.cvvnum
+      };
+      console.log(card, this.payinfo)
+      // Run card validation here and then attempt to tokenise
+      const loading = await this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'Please wait...',
 
-    let card = {
-      name: this.cardvals.value.crdname,
-      number: crdno[0] + crdno[1] + crdno[2] + crdno[3],//this.cardvals.value.crdnum,
-      expMonth: this.cardvals.value.expmnth,
-      expYear: this.cardvals.value.expyr,
-      cvc: this.cardvals.value.cvvnum
-    };
-    console.log(card, this.payinfo)
-    // Run card validation here and then attempt to tokenise
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-
-    });
-    await loading.present().then(() => {
-      this.stripe.createCardToken(card)
-        .then(token => {
-          loading.dismiss()
-          this.confirmpurchase(token.id)
-        })
-        .catch(error => {
-          this.showToast(error);
-          loading.dismiss()
-        });
-    })
+      });
+      await loading.present().then(() => {
+        this.stripe.createCardToken(card)
+          .then(token => {
+            loading.dismiss()
+            this.confirmpurchase(token.id)
+          })
+          .catch(error => {
+            this.showToast(error);
+            loading.dismiss()
+          });
+      })
+    // }
   }
   async confirmpurchase(token_id) {
-
     const confirm = await this.alert.create({
       header: "Proceed to Pay?",
-      message: this.stripeAmt+'credit/s = £'+this.stripeAmt+'.00',
+      message: this.stripeAmt + 'credit(s) = £' + this.stripeAmt + '.00',
       buttons: [
         {
           text: 'Proceed',
@@ -118,7 +131,7 @@ export class StripayPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-          
+
           }
         }
       ]

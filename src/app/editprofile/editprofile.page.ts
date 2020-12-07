@@ -22,7 +22,7 @@ export class EditprofilePage implements OnInit {
       firstname: ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       lastname: ['', Validators.compose([Validators.maxLength(100), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-      number: ['', [Validators.required, Validators.minLength(10)]],
+      number: ['',],
       age: '',
       empStatus: '',
       campanyName: '',

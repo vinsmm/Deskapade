@@ -87,6 +87,12 @@ text-align:center;
 --box-shadow:none;
 
 }
+.error {
+    font-size: 0.8em;
+    color: red !important;
+ 	margin-bottom: 15px !important;
+	margin-top:6px !important;
+}
 .backbutton
 {
 background-image: url(/assets/images/icons/arrow-left.svg);

@@ -42,6 +42,7 @@ export class UpcomingbookingPage implements OnInit {
     this.subscription = this.platform.backButton.subscribe(() => {
       this.navController.navigateRoot('/tabs/home')
     });
+    this.getbookingHistory()
   }
   ionViewWillLeave() {
     this.subscription.unsubscribe();
@@ -64,6 +65,7 @@ export class UpcomingbookingPage implements OnInit {
             if (res.status == true) {
               this.upcomingBookingArr = res.data;
             }else{
+              this.upcomingBookingArr=[]
               this.showToast(res.message)
            }
             loading.dismiss()
@@ -171,7 +173,7 @@ export class UpcomingbookingPage implements OnInit {
 
   // }
   bookAgain(item){
-    
+    localStorage.setItem('vendorloc_id',item.vloc_id)
     let navigationExtras: NavigationExtras = {
       queryParams: {
         vendorData: JSON.stringify(item)

@@ -71,15 +71,32 @@ export class BookagainPage implements OnInit {
   calculateCredits() {
     var entered_hours = this.vendorData.booking_hours//parseInt(localStorage.getItem("min_hours"));
     var entered_persons = this.vendorData.total_persons//parseInt(localStorage.getItem('persons'));
-
-    var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
-    var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
-
-    if (hoursParam <= personParam) {
-      this.credits = parseInt(this.vendorData.fix_price) * personParam
-    } else {
-      this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+    if (this.vendorData.rate_criteria == '1') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+     
+      if (hoursParam <= personParam) {
+        this.credits = parseInt(this.vendorData.fix_price) * personParam
+      } else {
+        this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+      }
+       
+    } else if (this.vendorData.rate_criteria == '2') {
+      this.credits = parseInt(this.vendorData.fix_price);
+    } else if (this.vendorData.rate_criteria == '3') {
+      var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+      var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+      console.log(hoursParam, personParam);
+      this.credits= parseInt(this.vendorData.fix_price) * (hoursParam * personParam)
     }
+    // var hoursParam = Math.ceil(entered_hours / parseInt(this.vendorData.booking_hours));
+    // var personParam = Math.ceil(entered_persons / parseInt(this.vendorData.max_persons))
+
+    // if (hoursParam <= personParam) {
+    //   this.credits = parseInt(this.vendorData.fix_price) * personParam
+    // } else {
+    //   this.credits = parseInt(this.vendorData.fix_price) * hoursParam
+    // }
 
   }
   async openCalendar() {
@@ -111,7 +128,7 @@ export class BookagainPage implements OnInit {
     if (this.str3.length && this.time.length) {
       let data = new FormData();
       data.append('security_key', '3067a0df625299b7128407c74a9e2c63a8b25c8c');
-      data.append('booking_id', this.vendorData.id);
+      data.append('booking_id', this.vendorData.b_id);
       data.append('booking_date', this.str3)
       data.append('booking_time', this.time.substring(11, 16))
       data.append('type_id', this.vendorData.booking_type)
@@ -126,15 +143,20 @@ export class BookagainPage implements OnInit {
       await loading.present().then(() => {
         this.httpClient.post(apiUrl + 'checkBookingAvailable', data)
           .subscribe((res: any) => {
-            var sTime = this.time.substring(11, 16); var eTime = parseInt(this.time.substring(11)) + parseInt(this.vendorData.booking_hours);
-            if (eTime > 23) {
-              this.showToast('Time Exceeding ')
+            if (res.status == true) {
+              var sTime = this.time.substring(11, 16); var eTime = parseInt(this.time.substring(11)) + parseInt(this.vendorData.booking_hours);
+              if (eTime > 23) {
+                this.showToast('Time Exceeding ')
+                this.valildDurationFlag = false;
+                this.bookingtime = ""
+              } else {
+                this.bookingtime = sTime + "-" + eTime + ":" + this.time.substring(14, 16)
+                this.valildDurationFlag = true;
+              }
+            } else{
               this.valildDurationFlag = false;
-              this.bookingtime = ""
-            } else {
-              this.bookingtime = sTime + "-" + eTime + ":" + this.time.substring(14, 16)
-              this.valildDurationFlag = true;
             }
+            this.showToast(res.message)
             loading.dismiss()
           }, error => {
             loading.dismiss()
@@ -187,7 +209,8 @@ export class BookagainPage implements OnInit {
                     // let navObj = { 'fromPage': 'bookagain', 'wallet_Amount': this.myCreditAmt,  }
                     let navigationExtras: NavigationExtras = {
                       queryParams: {
-                        pageData: JSON.stringify(navObj)
+                        pageData: JSON.stringify(navObj),
+                        replaceUrl: true
                       }
                     }
                     this.navController.navigateForward(`/tabs/upcomingbooking/flowcredit`, navigationExtras);
@@ -228,7 +251,8 @@ export class BookagainPage implements OnInit {
                     // let navObj = { 'fromPage': 'bookagain', 'wallet_Amount': this.myCreditAmt, }
                     let navigationExtras: NavigationExtras = {
                       queryParams: {
-                        pageData: JSON.stringify(navObj)
+                        pageData: JSON.stringify(navObj),
+                        replaceUrl: true
                       }
                     }
                     this.navController.navigateForward(`/tabs/upcomingbooking/flowcredit`, navigationExtras);
@@ -247,6 +271,7 @@ export class BookagainPage implements OnInit {
   }
   //proceed to book the venue from rebooking 
   async confirmBooking() {
+
     if (this.valildDurationFlag == true) {
       localStorage.setItem('notes', this.notes)
       var loggedin = localStorage.getItem('loggedIn')
@@ -272,7 +297,8 @@ export class BookagainPage implements OnInit {
             this.buyCredit = this.credits;
             if (this.myCreditAmt >= this.buyCredit) {
 
-              this.directPurchase(this.buyCredit)
+              this.directPurchase(this.buyCredit);
+
             } else {
               let navObj = {
                 'fromPage': 'bookagain',
@@ -296,9 +322,11 @@ export class BookagainPage implements OnInit {
               }
               let navigationExtras: NavigationExtras = {
                 queryParams: {
-                  pageData: JSON.stringify(navObj)
+                  pageData: JSON.stringify(navObj),
+                  replaceUrl: true
                 }
               };
+              this.navController.pop()
               this.navController.navigateForward(`/tabs/upcomingbooking/flowcredit`, navigationExtras);
             }
 
@@ -345,9 +373,11 @@ export class BookagainPage implements OnInit {
           let navObj = res.data[0]
           let navigationExtras: NavigationExtras = {
             queryParams: {
-              bookingData: JSON.stringify(navObj)
+              bookingData: JSON.stringify(navObj),
+              replaceUrl: true
             }
           }
+          this.navController.pop()
           this.navController.navigateForward('/tabs/upcomingbooking/bookingconfirm', navigationExtras)
 
         }, error => {

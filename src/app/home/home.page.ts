@@ -218,15 +218,29 @@ export class HomePage implements OnInit {
         var entered_hours = parseInt(this.hours);
         var entered_persons = parseInt(this.persons);
         for (let i = 0; i < this.recommandedArr.length; i++) {
-          var hoursParam = Math.ceil(entered_hours / parseInt(this.recommandedArr[i].booking_hours));
-          var personParam = Math.ceil(entered_persons / parseInt(this.recommandedArr[i].max_persons))
-          var calculatedRate;
-          if (hoursParam <= personParam) {
-            calculatedRate = parseInt(this.recommandedArr[i].fix_price) * personParam
-          } else {
-            calculatedRate = parseInt(this.recommandedArr[i].fix_price) * hoursParam
+          console.log(this.recommandedArr[i].rate_criteria);
+          
+          if (this.recommandedArr[i].rate_criteria == '1') {
+            var hoursParam = Math.ceil(entered_hours / parseInt(this.recommandedArr[i].booking_hours));
+            var personParam = Math.ceil(entered_persons / parseInt(this.recommandedArr[i].max_persons))
+            var calculatedRate;
+            if (hoursParam <= personParam) {
+              calculatedRate = parseInt(this.recommandedArr[i].fix_price) * personParam
+            } else {
+              calculatedRate = parseInt(this.recommandedArr[i].fix_price) * hoursParam
+            }
+            this.recommandedArr[i].caltulateRate = calculatedRate.toString()
+          } else if (this.recommandedArr[i].rate_criteria == '2') {
+            this.recommandedArr[i].caltulateRate = parseInt(this.recommandedArr[i].fix_price);
+          } else if (this.recommandedArr[i].rate_criteria == '3') {
+            var hoursParam = Math.ceil(entered_hours / parseInt(this.recommandedArr[i].booking_hours));
+            var personParam = Math.ceil(entered_persons / parseInt(this.recommandedArr[i].max_persons))
+            console.log(hoursParam, personParam);
+            var calculatedRate;
+            calculatedRate = parseInt(this.recommandedArr[i].fix_price) * (hoursParam * personParam)
+            this.recommandedArr[i].caltulateRate = calculatedRate.toString()
           }
-          this.recommandedArr[i].caltulateRate = calculatedRate.toString()
+
         }
       }
     })
@@ -348,16 +362,41 @@ export class HomePage implements OnInit {
             var entered_hours = parseInt(this.hours);
             var entered_persons = parseInt(this.persons);
             for (let i = 0; i < this.venueList.length; i++) {
-              var hoursParam = Math.ceil(entered_hours / parseInt(this.venueList[i].booking_hours));
-              var personParam = Math.ceil(entered_persons / parseInt(this.venueList[i].max_persons))
-              var calculatedRate;
-              if (hoursParam <= personParam) {
-                calculatedRate = parseInt(this.venueList[i].fix_price) * personParam
-              } else {
-                calculatedRate = parseInt(this.venueList[i].fix_price) * hoursParam
+              console.log(this.venueList[i].rate_criteria);
+              
+              if (this.venueList[i].rate_criteria == '1') {
+                var hoursParam = Math.ceil(entered_hours / parseInt(this.venueList[i].booking_hours));
+                var personParam = Math.ceil(entered_persons / parseInt(this.venueList[i].max_persons))
+                var calculatedRate;
+                if (hoursParam <= personParam) {
+                  calculatedRate = parseInt(this.venueList[i].fix_price) * personParam
+                } else {
+                  calculatedRate = parseInt(this.venueList[i].fix_price) * hoursParam
+                }
+                this.venueList[i].caltulateRate = calculatedRate.toString()
+              } else if (this.venueList[i].rate_criteria == '2') {
+                this.venueList[i].caltulateRate = parseInt(this.venueList[i].fix_price);
+              } else if (this.venueList[i].rate_criteria == '3') {
+                var hoursParam = Math.ceil(entered_hours / parseInt(this.venueList[i].booking_hours));
+                var personParam = Math.ceil(entered_persons / parseInt(this.venueList[i].max_persons))
+                console.log(hoursParam, personParam);
+                var calculatedRate;
+                calculatedRate = parseInt(this.venueList[i].fix_price) * (hoursParam * personParam)
+                this.venueList[i].caltulateRate = calculatedRate.toString()
               }
-              this.venueList[i].caltulateRate = calculatedRate.toString()
+    
             }
+            // for (let i = 0; i < this.venueList.length; i++) {
+            //   var hoursParam = Math.ceil(entered_hours / parseInt(this.venueList[i].booking_hours));
+            //   var personParam = Math.ceil(entered_persons / parseInt(this.venueList[i].max_persons))
+            //   var calculatedRate;
+            //   if (hoursParam <= personParam) {
+            //     calculatedRate = parseInt(this.venueList[i].fix_price) * personParam
+            //   } else {
+            //     calculatedRate = parseInt(this.venueList[i].fix_price) * hoursParam
+            //   }
+            //   this.venueList[i].caltulateRate = calculatedRate.toString()
+            // }
             let navigationExtras: NavigationExtras = {
               queryParams: {
                 venueList: JSON.stringify(this.venueList)
@@ -471,7 +510,8 @@ export class HomePage implements OnInit {
     this.getLoc()
   }
   async detail(item) {
-    localStorage.setItem('vendorloc_id', item.vendorloc_id)
+    localStorage.setItem('vendorloc_id', item.vendorloc_id);
+    localStorage.setItem('rate_criteria',item.rate_criteria)
     if (this.address.length <= 2) {
       this.showToast('Please enter Pin Code or Town')
     } else if (this.typeId.length <= 0) {
@@ -493,8 +533,8 @@ export class HomePage implements OnInit {
       data.append('vendorloc_id', item.vendorloc_id)
       data.append('stime', this.timeToList);
       data.append('duration', this.hours);
-      data.append('lat', this.lat);
-      data.append('long', this.long);
+      data.append('lat', localStorage.getItem('lat'));
+      data.append('long', localStorage.getItem('long'));
       const loading = await this.loading.create({
         cssClass: 'my-custom-class',
         message: 'Please wait...',

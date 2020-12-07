@@ -51,7 +51,7 @@ export class ActivityPage implements OnInit {
           console.log(res);
           if (res.status == true) {
             this.historyArr = res.data;
-            this.myCredit = res.balance;
+            this.myCredit = res.balance.toFixed();
             if (this.myCredit.length <= 0) {
               this.myCredit = 0
             }
